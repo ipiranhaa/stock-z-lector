@@ -8,7 +8,12 @@ type StockIndexing = 'SET50' | 'SET100' | 'SETHD'
 
 const userAgent =
   'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150  Safari/537.36'
+
 const tableBodyXPath = '//*[@id="maincontent"]/div/div[2]/div/div/div/div[3]/table/tbody/tr'
+
+//
+// ─── UTILITIES ──────────────────────────────────────────────────────────────────
+//
 
 const getAllStockByElements = async (elements: ElementHandle[]) => {
   const stocks = []
@@ -20,7 +25,13 @@ const getAllStockByElements = async (elements: ElementHandle[]) => {
   return stocks
 }
 
+//
+// ─── MAIN ───────────────────────────────────────────────────────────────────────
+//
+
 export const getStockByIndex = async (browser: Browser, indexing: StockIndexing) => {
+  console.info(`Getting ${indexing} stock list...`)
+
   const page: Page = await browser.newPage()
   await page.setUserAgent(userAgent)
   await page.goto(
@@ -28,6 +39,8 @@ export const getStockByIndex = async (browser: Browser, indexing: StockIndexing)
   )
   const elements = await page.$x(tableBodyXPath)
   const stocks = await getAllStockByElements(elements)
+
+  console.info(`Get ${indexing} stock list... DONE`)
 
   return stocks
 }

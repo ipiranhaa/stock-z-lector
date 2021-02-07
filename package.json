@@ -7,7 +7,9 @@
   "author": "ipiranhaa <tanatezp@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --watch 'src/**' --ext 'ts,json' --ignore 'src/**/*.spec.ts' --exec 'ts-node src/app.ts'"
+    "start": "ts-node src/app.ts",
+    "dev": "nodemon --watch 'src/**' --ext 'ts,json' --ignore 'src/**/*.spec.ts' --exec 'ts-node src/app.ts'",
+    "ok": "npx tsc && eslint"
   },
   "dependencies": {
     "puppeteer": "^6.0.0"
