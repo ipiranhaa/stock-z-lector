@@ -56,7 +56,8 @@ export interface JittaStockDetail {
 }
 
 export const getStockDetail = async (browser: Browser, stock: string) => {
-  console.info(`Getting ${stock.toUpperCase()} detail...`)
+  const stockName = stock.toUpperCase()
+  console.info(`Getting ${stockName} detail...`)
 
   const page: Page = await browser.newPage()
   await page.setUserAgent(userAgent)
@@ -74,7 +75,7 @@ export const getStockDetail = async (browser: Browser, stock: string) => {
   const ScoreElements = await page.$x(scoreXPath)
   const score = await getScore(ScoreElements)
 
-  console.info(`Get ${stock.toUpperCase()} detail... DONE`)
+  console.info(`Get ${stockName} detail... DONE`)
 
-  return { name: stock, price, lossChance, linePercentage, score } as JittaStockDetail
+  return { name: stockName, price, lossChance, linePercentage, score } as JittaStockDetail
 }

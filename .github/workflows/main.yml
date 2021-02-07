@@ -1,0 +1,33 @@
+name: Indexing build
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 30 10 ? * MON-FRI *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: setup node env
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: cache managing
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-js-${{ hashFiles('package-lock.json') }}
+      - name: install dependencies
+        run: npm install
+      - name: generate README file
+        run: npm run start
+      - name: push a new README file
+        uses: mikeal/publish-to-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH_NAME: 'main'
