@@ -24,9 +24,9 @@ jobs:
           key: ${{ runner.os }}-js-${{ hashFiles('package-lock.json') }}
       - name: install dependencies
         run: npm install
-      - name: generate README file
+      - name: generate indexing files
         run: npm run start
-      - name: push a new README file
+      - name: push new indexing files
         uses: mikeal/publish-to-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
