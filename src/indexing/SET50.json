@@ -1,0 +1,100 @@
+[
+    {
+        "name": "ttw",
+        "price": "฿12.00",
+        "lossChance": "43.1%",
+        "linePercentage": "+93.44%",
+        "score": "6.22"
+    },
+    {
+        "name": "tisco",
+        "price": "฿94.25",
+        "lossChance": "45.2%",
+        "linePercentage": "-15.92%",
+        "score": "5.56"
+    },
+    {
+        "name": "scc",
+        "price": "฿371.00",
+        "lossChance": "45.0%",
+        "linePercentage": "+13.03%",
+        "score": "5.36"
+    },
+    {
+        "name": "ktb",
+        "price": "฿12.20",
+        "lossChance": "44.5%",
+        "linePercentage": "-30.63%",
+        "score": "4.50"
+    },
+    {
+        "name": "pttep",
+        "price": "฿109.00",
+        "lossChance": "44.5%",
+        "linePercentage": "-55.33%",
+        "score": "4.33"
+    },
+    {
+        "name": "ivl",
+        "price": "฿38.25",
+        "lossChance": "49.7%",
+        "linePercentage": "+722.47%",
+        "score": "4.26"
+    },
+    {
+        "name": "scb",
+        "price": "฿99.50",
+        "lossChance": "49.7%",
+        "linePercentage": "+98.22%",
+        "score": "4.22"
+    },
+    {
+        "name": "bbl",
+        "price": "฿123.00",
+        "lossChance": "49.7%",
+        "linePercentage": "+67.92%",
+        "score": "4.21"
+    },
+    {
+        "name": "kbank",
+        "price": "฿138.00",
+        "lossChance": "46.9%",
+        "linePercentage": "+24.81%",
+        "score": "4.15"
+    },
+    {
+        "name": "lh",
+        "price": "฿7.90",
+        "lossChance": "51.4%",
+        "linePercentage": "+87.78%",
+        "score": "3.87"
+    },
+    {
+        "name": "ptt",
+        "price": "฿39.00",
+        "lossChance": "51.4%",
+        "linePercentage": "+143.40%",
+        "score": "3.68"
+    },
+    {
+        "name": "intuch",
+        "price": "฿55.75",
+        "lossChance": "51.4%",
+        "linePercentage": "+164.49%",
+        "score": "3.65"
+    },
+    {
+        "name": "pttgc",
+        "price": "฿62.00",
+        "lossChance": "54.0%",
+        "linePercentage": "+716.42%",
+        "score": "2.40"
+    },
+    {
+        "name": "top",
+        "price": "฿58.75",
+        "lossChance": "57.7%",
+        "linePercentage": "+100.00%",
+        "score": "0.85"
+    }
+]
