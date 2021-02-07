@@ -1,29 +1,16 @@
-import { Browser, ElementHandle, Page } from 'puppeteer'
+import puppeteer, { Browser } from 'puppeteer'
+import { getStockByIndex, intersecStocks } from './set'
+import { getStockDetail } from './jitta'
 
-const puppeteer = require('puppeteer')
-
-type StockIndexing = 'SET50' | 'SETHD'
-
-const getAllStockByElements = async (elements: ElementHandle[]) => {
-  const stocks = []
-  for (let index = 0; index < elements.length; index++) {
-    const name = await elements[index].$eval('td > a', (a: Element) => a.innerHTML)
-    stocks.push(name.trim())
+const getAllStockDetail = async (browser: Browser, stocks: string[]) => {
+  const result = []
+  for (let index = 0; index < stocks.length; index++) {
+    const stock = stocks[index].toLowerCase()
+    const detail = await getStockDetail(browser, stock)
+    result.push(detail)
   }
 
-  return stocks
-}
-
-const getStockByIndex = async (browser: Browser, indexing: StockIndexing) => {
-  const page: Page = await browser.newPage()
-  await page.goto(
-    `https://marketdata.set.or.th/mkt/sectorquotation.do?sector=${indexing}&language=th&country=TH`
-  )
-  const elements = await page.$x(
-    '//*[@id="maincontent"]/div/div[2]/div/div/div/div[3]/table/tbody/tr'
-  )
-  const stocks = await getAllStockByElements(elements)
-  return stocks
+  return result
 }
 
 ;(async () => {
@@ -34,8 +21,9 @@ const getStockByIndex = async (browser: Browser, indexing: StockIndexing) => {
 
   const set50Stocks = await getStockByIndex(browser, 'SET50')
   const setHDStocks = await getStockByIndex(browser, 'SETHD')
-  console.log(set50Stocks)
-  console.log(setHDStocks)
+  const interestingStocks = intersecStocks(set50Stocks, setHDStocks)
+  const allStockDetail = await getAllStockDetail(browser, interestingStocks)
+  console.log(allStockDetail)
 
   await browser.close()
 })()
