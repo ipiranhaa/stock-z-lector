@@ -19,7 +19,7 @@ const getAllStockDetail = async (browser: Browser, stocks: string[]) => {
 ;(async () => {
   const browser: Browser = await puppeteer.launch({
     headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    args: ['--no-sandbox', '--disable-setuid-sandbox', '--start-maximized'],
   })
 
   const set50Stocks = await getStockByIndex(browser, 'SET50')

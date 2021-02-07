@@ -16,6 +16,8 @@ const lineXPath =
 const scoreXPath =
   '//*[@id="app"]/div/div[3]/div/div/div/div[3]/div[1]/div/div/div[1]/div[1]/div/div[2]'
 
+const factorXPath = '//*[@id="app"]/div/div[3]/div/div/div/div[3]/div[1]/div/div/div[5]/div[1]/div'
+
 //
 // ─── UTILITIES ──────────────────────────────────────────────────────────────────
 //
@@ -43,6 +45,19 @@ const getScore = async (elements: ElementHandle[]) => {
   return getScoreValue(scoreHtml)
 }
 
+const getFactorScore = async (elements: ElementHandle[]) => {
+  const selectedElement = elements[0]
+  const factorHtmls = await selectedElement.$$eval(
+    'div > span:first-child',
+    (elements: Element[]) => elements.map((element) => element.innerHTML)
+  )
+  const total = factorHtmls
+    .map((factorHtml) => Number(factorHtml.split('(')[1].split(')')[0]))
+    .reduce((total, score) => total + score, 0)
+
+  return { totalFactorScore: total, factorCount: factorHtmls.length }
+}
+
 //
 // ─── MAIN ───────────────────────────────────────────────────────────────────────
 //
@@ -52,7 +67,8 @@ export interface JittaStockDetail {
   price: string
   lossChance: string
   linePercentage: string
-  score: string
+  score: number
+  factorPercentage: number
 }
 
 export const getStockDetail = async (browser: Browser, stock: string) => {
@@ -61,6 +77,7 @@ export const getStockDetail = async (browser: Browser, stock: string) => {
 
   const page: Page = await browser.newPage()
   await page.setUserAgent(userAgent)
+  await page.setViewport({ width: 1366, height: 768 })
   await page.goto(`https://www.jitta.com/stock/bkk:${stock}`)
 
   const priceElements = await page.$x(priceXPath)
@@ -72,10 +89,22 @@ export const getStockDetail = async (browser: Browser, stock: string) => {
   const lineElements = await page.$x(lineXPath)
   const linePercentage = await getLine(lineElements)
 
-  const ScoreElements = await page.$x(scoreXPath)
-  const score = await getScore(ScoreElements)
+  const scoreElements = await page.$x(scoreXPath)
+  const score = await getScore(scoreElements)
+
+  // Factors
+  const factorElements = await page.$x(factorXPath)
+  const { totalFactorScore, factorCount } = await getFactorScore(factorElements)
+  const totalFactorPercentage = ((totalFactorScore / (100 * factorCount)) * 100).toFixed(2)
 
   console.info(`Get ${stockName} detail... DONE`)
 
-  return { name: stockName, price, lossChance, linePercentage, score } as JittaStockDetail
+  return {
+    name: stockName,
+    price,
+    lossChance,
+    linePercentage,
+    score: Number(score),
+    factorPercentage: Number(totalFactorPercentage),
+  } as JittaStockDetail
 }
