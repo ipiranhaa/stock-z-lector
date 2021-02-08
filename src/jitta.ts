@@ -68,7 +68,7 @@ export interface JittaStockDetail {
   lossChance: string
   linePercentage: string
   score: number
-  factorPercentage: number
+  factorPercentage: string
 }
 
 export const getStockDetail = async (browser: Browser, stock: string) => {
@@ -95,7 +95,7 @@ export const getStockDetail = async (browser: Browser, stock: string) => {
   // Factors
   const factorElements = await page.$x(factorXPath)
   const { totalFactorScore, factorCount } = await getFactorScore(factorElements)
-  const totalFactorPercentage = ((totalFactorScore / (100 * factorCount)) * 100).toFixed(2)
+  const totalFactorPercentage = `${((totalFactorScore / (100 * factorCount)) * 100).toFixed(2)}%`
 
   console.info(`Get ${stockName} detail... DONE`)
 
@@ -105,6 +105,6 @@ export const getStockDetail = async (browser: Browser, stock: string) => {
     lossChance,
     linePercentage,
     score: Number(score),
-    factorPercentage: Number(totalFactorPercentage),
+    factorPercentage: totalFactorPercentage,
   } as JittaStockDetail
 }

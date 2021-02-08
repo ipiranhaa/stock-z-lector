@@ -34,8 +34,17 @@ const getAllStockDetail = async (browser: Browser, stocks: string[]) => {
   const sortedSet50Result = sortedSet100Result.filter((stock: JittaStockDetail) =>
     set50Stocks.includes(stock.name.toUpperCase())
   )
-  const formattedSET100Json = JSON.stringify(sortedSet100Result, null, 4)
-  const formattedSET50Json = JSON.stringify(sortedSet50Result, null, 4)
+
+  const formattedSET100Json = JSON.stringify(
+    { createdAt: new Date(), results: sortedSet100Result },
+    null,
+    4
+  )
+  const formattedSET50Json = JSON.stringify(
+    { createdAt: new Date(), results: sortedSet50Result },
+    null,
+    4
+  )
 
   fs.writeFile('src/indexing/SET100.json', formattedSET100Json, (err) => {
     if (err) throw err
