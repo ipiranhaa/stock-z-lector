@@ -1,5 +1,5 @@
 {
-    "createdAt": "2021-02-09T08:42:09.513Z",
+    "createdAt": "2021-02-10T03:42:24.913Z",
     "results": [
         {
             "name": "TTW",
@@ -11,33 +11,33 @@
         },
         {
             "name": "TISCO",
-            "price": "฿95.50",
+            "price": "฿95.00",
             "lossChance": "45.2%",
-            "linePercentage": "-14.81%",
+            "linePercentage": "-15.26%",
             "score": 5.56,
             "factorPercentage": "59.00%"
         },
         {
             "name": "SCC",
-            "price": "฿373.00",
+            "price": "฿375.00",
             "lossChance": "45.0%",
-            "linePercentage": "+13.64%",
+            "linePercentage": "+14.24%",
             "score": 5.36,
             "factorPercentage": "57.20%"
         },
         {
             "name": "KTB",
-            "price": "฿12.70",
+            "price": "฿12.60",
             "lossChance": "46.5%",
-            "linePercentage": "-27.79%",
+            "linePercentage": "-28.36%",
             "score": 4.5,
             "factorPercentage": "42.40%"
         },
         {
             "name": "PTTEP",
-            "price": "฿109.50",
+            "price": "฿111.00",
             "lossChance": "44.5%",
-            "linePercentage": "-55.13%",
+            "linePercentage": "-54.51%",
             "score": 4.33,
             "factorPercentage": "38.00%"
         },
@@ -51,25 +51,25 @@
         },
         {
             "name": "SCB",
-            "price": "฿106.00",
+            "price": "฿105.50",
             "lossChance": "49.7%",
-            "linePercentage": "+111.17%",
+            "linePercentage": "+110.17%",
             "score": 4.22,
             "factorPercentage": "44.40%"
         },
         {
             "name": "BBL",
-            "price": "฿129.50",
+            "price": "฿128.00",
             "lossChance": "49.7%",
-            "linePercentage": "+76.79%",
+            "linePercentage": "+74.74%",
             "score": 4.21,
             "factorPercentage": "39.40%"
         },
         {
             "name": "KBANK",
-            "price": "฿147.00",
+            "price": "฿146.00",
             "lossChance": "46.6%",
-            "linePercentage": "+32.95%",
+            "linePercentage": "+32.05%",
             "score": 4.15,
             "factorPercentage": "41.20%"
         },
@@ -83,25 +83,25 @@
         },
         {
             "name": "PTT",
-            "price": "฿40.25",
+            "price": "฿41.00",
             "lossChance": "51.4%",
-            "linePercentage": "+151.20%",
+            "linePercentage": "+155.88%",
             "score": 3.68,
             "factorPercentage": "34.20%"
         },
         {
             "name": "INTUCH",
-            "price": "฿56.25",
+            "price": "฿55.75",
             "lossChance": "51.4%",
-            "linePercentage": "+166.87%",
+            "linePercentage": "+164.49%",
             "score": 3.65,
             "factorPercentage": "50.80%"
         },
         {
             "name": "PTTGC",
-            "price": "฿63.00",
+            "price": "฿64.75",
             "lossChance": "54.0%",
-            "linePercentage": "+729.59%",
+            "linePercentage": "+752.63%",
             "score": 2.4,
             "factorPercentage": "31.80%"
         },
