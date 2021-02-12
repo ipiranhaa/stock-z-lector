@@ -75,36 +75,40 @@ export const getStockDetail = async (browser: Browser, stock: string) => {
   const stockName = stock.toUpperCase()
   console.info(`Getting ${stockName} detail...`)
 
-  const page: Page = await browser.newPage()
-  await page.setUserAgent(userAgent)
-  await page.setViewport({ width: 1366, height: 768 })
-  await page.goto(`https://www.jitta.com/stock/bkk:${stock}`)
+  try {
+    const page: Page = await browser.newPage()
+    await page.setUserAgent(userAgent)
+    await page.setViewport({ width: 1366, height: 768 })
+    await page.goto(`https://www.jitta.com/stock/bkk:${stock}`)
 
-  const priceElements = await page.$x(priceXPath)
-  const price = await getElementValue(priceElements[0])
+    const priceElements = await page.$x(priceXPath)
+    const price = await getElementValue(priceElements[0])
 
-  const lossChanceElements = await page.$x(lossChanceXPath)
-  const lossChance = await getElementValue(lossChanceElements[0])
+    const lossChanceElements = await page.$x(lossChanceXPath)
+    const lossChance = await getElementValue(lossChanceElements[0])
 
-  const lineElements = await page.$x(lineXPath)
-  const linePercentage = await getLine(lineElements)
+    const lineElements = await page.$x(lineXPath)
+    const linePercentage = await getLine(lineElements)
 
-  const scoreElements = await page.$x(scoreXPath)
-  const score = await getScore(scoreElements)
+    const scoreElements = await page.$x(scoreXPath)
+    const score = await getScore(scoreElements)
 
-  // Factors
-  const factorElements = await page.$x(factorXPath)
-  const { totalFactorScore, factorCount } = await getFactorScore(factorElements)
-  const totalFactorPercentage = `${((totalFactorScore / (100 * factorCount)) * 100).toFixed(2)}%`
+    // Factors
+    const factorElements = await page.$x(factorXPath)
+    const { totalFactorScore, factorCount } = await getFactorScore(factorElements)
+    const totalFactorPercentage = `${((totalFactorScore / (100 * factorCount)) * 100).toFixed(2)}%`
 
-  console.info(`Get ${stockName} detail... DONE`)
+    console.info(`Get ${stockName} detail... DONE`)
 
-  return {
-    name: stockName,
-    price,
-    lossChance,
-    linePercentage,
-    score: Number(score),
-    factorPercentage: totalFactorPercentage,
-  } as JittaStockDetail
+    return {
+      name: stockName,
+      price,
+      lossChance,
+      linePercentage,
+      score: Number(score),
+      factorPercentage: totalFactorPercentage,
+    } as JittaStockDetail
+  } catch (error) {
+    throw error
+  }
 }
