@@ -1,5 +1,5 @@
 {
-    "createdAt": "2021-02-12T10:17:34.841Z",
+    "createdAt": "13/02/2021 07:57:22",
     "results": [
         {
             "name": "TTW",
@@ -7,7 +7,9 @@
             "lossChance": "43.2%",
             "linePercentage": "+91.83%",
             "score": 6.22,
-            "factorPercentage": "66.20%"
+            "factorPercentage": "66.20%",
+            "industry": "Resources",
+            "sector": "Energy & Utilities"
         },
         {
             "name": "TISCO",
@@ -15,7 +17,9 @@
             "lossChance": "44.1%",
             "linePercentage": "-17.04%",
             "score": 5.9,
-            "factorPercentage": "61.80%"
+            "factorPercentage": "61.80%",
+            "industry": "Financials",
+            "sector": "Banking"
         },
         {
             "name": "SCC",
@@ -23,7 +27,9 @@
             "lossChance": "45.1%",
             "linePercentage": "+18.51%",
             "score": 5.37,
-            "factorPercentage": "57.00%"
+            "factorPercentage": "57.00%",
+            "industry": "Property & Construction",
+            "sector": "Construction Materials"
         },
         {
             "name": "KTB",
@@ -31,15 +37,9 @@
             "lossChance": "44.4%",
             "linePercentage": "-44.39%",
             "score": 4.6,
-            "factorPercentage": "43.00%"
-        },
-        {
-            "name": "INTUCH",
-            "price": "฿57.00",
-            "lossChance": "49.7%",
-            "linePercentage": "+176.33%",
-            "score": 4.53,
-            "factorPercentage": "59.00%"
+            "factorPercentage": "43.00%",
+            "industry": "Financials",
+            "sector": "Banking"
         },
         {
             "name": "PTTEP",
@@ -47,7 +47,9 @@
             "lossChance": "44.4%",
             "linePercentage": "-55.12%",
             "score": 4.33,
-            "factorPercentage": "38.00%"
+            "factorPercentage": "38.00%",
+            "industry": "Resources",
+            "sector": "Energy & Utilities"
         },
         {
             "name": "IVL",
@@ -55,7 +57,9 @@
             "lossChance": "49.7%",
             "linePercentage": "+221.43%",
             "score": 4.26,
-            "factorPercentage": "40.60%"
+            "factorPercentage": "40.60%",
+            "industry": "Industrials",
+            "sector": "Petrochemicals & Chemicals"
         },
         {
             "name": "BBL",
@@ -63,7 +67,9 @@
             "lossChance": "49.7%",
             "linePercentage": "+72.01%",
             "score": 4.24,
-            "factorPercentage": "39.60%"
+            "factorPercentage": "39.60%",
+            "industry": "Financials",
+            "sector": "Banking"
         },
         {
             "name": "SCB",
@@ -71,7 +77,9 @@
             "lossChance": "49.7%",
             "linePercentage": "+111.10%",
             "score": 4.23,
-            "factorPercentage": "44.40%"
+            "factorPercentage": "44.40%",
+            "industry": "Financials",
+            "sector": "Banking"
         },
         {
             "name": "KBANK",
@@ -79,7 +87,9 @@
             "lossChance": "46.6%",
             "linePercentage": "+31.06%",
             "score": 4.2,
-            "factorPercentage": "41.60%"
+            "factorPercentage": "41.60%",
+            "industry": "Financials",
+            "sector": "Banking"
         },
         {
             "name": "LH",
@@ -87,7 +97,9 @@
             "lossChance": "51.4%",
             "linePercentage": "+90.16%",
             "score": 3.86,
-            "factorPercentage": "40.20%"
+            "factorPercentage": "40.20%",
+            "industry": "Property & Construction",
+            "sector": "Property Development"
         },
         {
             "name": "PTT",
@@ -95,7 +107,19 @@
             "lossChance": "51.4%",
             "linePercentage": "+151.20%",
             "score": 3.68,
-            "factorPercentage": "34.20%"
+            "factorPercentage": "34.20%",
+            "industry": "Resources",
+            "sector": "Energy & Utilities"
+        },
+        {
+            "name": "INTUCH",
+            "price": "฿57.00",
+            "lossChance": "51.4%",
+            "linePercentage": "+172.01%",
+            "score": 3.68,
+            "factorPercentage": "52.40%",
+            "industry": "Technology",
+            "sector": "Information & Communication Technology"
         },
         {
             "name": "PTTGC",
@@ -103,7 +127,9 @@
             "lossChance": "54.0%",
             "linePercentage": "+684.74%",
             "score": 2.4,
-            "factorPercentage": "31.80%"
+            "factorPercentage": "31.80%",
+            "industry": "Industrials",
+            "sector": "Petrochemicals & Chemicals"
         },
         {
             "name": "TOP",
@@ -111,7 +137,9 @@
             "lossChance": "57.7%",
             "linePercentage": "+100.00%",
             "score": 0.89,
-            "factorPercentage": "23.40%"
+            "factorPercentage": "23.40%",
+            "industry": "Resources",
+            "sector": "Energy & Utilities"
         }
     ]
 }
