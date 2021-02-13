@@ -1,4 +1,6 @@
+import { ElementHandle } from 'puppeteer'
 import { JittaStockDetail } from './jitta'
+import { Industry } from './set'
 
 //
 // ─── UTILITIES ──────────────────────────────────────────────────────────────────
@@ -22,7 +24,9 @@ const byScore = (aDetail: JittaStockDetail, bDetail: JittaStockDetail) => {
 // ─── MAIN ───────────────────────────────────────────────────────────────────────
 //
 
-export const prioratiseStock = (stockDetailList: JittaStockDetail[]) => {
+export interface StockDetail extends JittaStockDetail, Industry {}
+
+export const prioratiseStock = (stockDetailList: StockDetail[]) => {
   /* 
   Ordering by
     1. Score
@@ -32,3 +36,6 @@ export const prioratiseStock = (stockDetailList: JittaStockDetail[]) => {
 
   return stockDetailList.sort(byScore)
 }
+
+export const getElementValue = async (element: ElementHandle) =>
+  await element.evaluate((element: Element) => element.innerHTML)

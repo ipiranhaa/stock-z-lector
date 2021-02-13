@@ -1,4 +1,5 @@
 import { Browser, ElementHandle, Page } from 'puppeteer'
+import { getElementValue } from './utilities'
 
 //
 // ─── SETTINGS ───────────────────────────────────────────────────────────────────
@@ -21,9 +22,6 @@ const factorXPath = '//*[@id="app"]/div/div[3]/div/div/div/div[3]/div[1]/div/div
 //
 // ─── UTILITIES ──────────────────────────────────────────────────────────────────
 //
-
-const getElementValue = async (element: ElementHandle) =>
-  await element.evaluate((element: Element) => element.innerHTML)
 
 const getLine = async (elements: ElementHandle[]) => {
   const selectedElement = elements[0]
@@ -71,7 +69,7 @@ export interface JittaStockDetail {
   factorPercentage: string
 }
 
-export const getStockDetail = async (browser: Browser, stock: string) => {
+const getStockDetail = async (browser: Browser, stock: string) => {
   const stockName = stock.toUpperCase()
   console.info(`Getting ${stockName} detail...`)
 
@@ -111,4 +109,15 @@ export const getStockDetail = async (browser: Browser, stock: string) => {
   } catch (error) {
     throw error
   }
+}
+
+export const getAllStockDetail = async (browser: Browser, stocks: string[]) => {
+  const result = []
+  for (let index = 0; index < stocks.length; index++) {
+    const stock = stocks[index].toLowerCase()
+    const detail = await getStockDetail(browser, stock)
+    result.push(detail)
+  }
+
+  return result
 }
