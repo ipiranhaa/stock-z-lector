@@ -1,5 +1,5 @@
 {
-    "createdAt": "13/02/2021 07:57:22",
+    "createdAt": "15/02/2021 03:44:30",
     "results": [
         {
             "name": "TTW",
@@ -42,16 +42,6 @@
             "sector": "Banking"
         },
         {
-            "name": "TPIPP",
-            "price": "฿4.40",
-            "lossChance": "43.9%",
-            "linePercentage": "-69.83%",
-            "score": 5.52,
-            "factorPercentage": "60.00%",
-            "industry": "Resources",
-            "sector": "Energy & Utilities"
-        },
-        {
             "name": "SCC",
             "price": "฿375.00",
             "lossChance": "45.1%",
@@ -80,6 +70,16 @@
             "factorPercentage": "56.80%",
             "industry": "Property & Construction",
             "sector": "Property Development"
+        },
+        {
+            "name": "TPIPP",
+            "price": "฿4.40",
+            "lossChance": "43.9%",
+            "linePercentage": "-67.39%",
+            "score": 5.07,
+            "factorPercentage": "55.20%",
+            "industry": "Resources",
+            "sector": "Energy & Utilities"
         },
         {
             "name": "MAJOR",
