@@ -95,6 +95,7 @@ const getStockDetail = async (browser: Browser, stock: string) => {
     const factorElements = await page.$x(factorXPath)
     const { totalFactorScore, factorCount } = await getFactorScore(factorElements)
     const totalFactorPercentage = `${((totalFactorScore / (100 * factorCount)) * 100).toFixed(2)}%`
+    page.close()
 
     console.info(`Get ${stockName} detail... DONE`)
 
@@ -107,6 +108,7 @@ const getStockDetail = async (browser: Browser, stock: string) => {
       factorPercentage: totalFactorPercentage,
     } as JittaStockDetail
   } catch (error) {
+    console.error(error)
     throw error
   }
 }
