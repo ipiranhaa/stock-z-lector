@@ -7,7 +7,7 @@
   "author": "ipiranhaa <tanatezp@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node src/app.ts",
+    "start": "ts-node src/app.ts --unhandled-rejections=strict",
     "dev": "nodemon --watch 'src/**' --ext 'ts,json' --ignore 'src/**/*.spec.ts' --exec 'ts-node src/app.ts'",
     "ok": "npx tsc && eslint"
   },
