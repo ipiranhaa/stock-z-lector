@@ -1,0 +1,305 @@
+{
+    "createdAt": "24/02/2021 21:49:04",
+    "results": [
+        {
+            "name": "TTW",
+            "price": "฿11.90",
+            "lossChance": "43.5%",
+            "linePercentage": "+91.83%",
+            "score": 6.22,
+            "factorPercentage": "66.20%",
+            "industry": "Resources",
+            "sector": "Energy & Utilities"
+        },
+        {
+            "name": "TCAP",
+            "price": "฿32.25",
+            "lossChance": "45.0%",
+            "linePercentage": "+12.21%",
+            "score": 5.85,
+            "factorPercentage": "54.20%",
+            "industry": "Financials",
+            "sector": "Banking"
+        },
+        {
+            "name": "THANI",
+            "price": "฿4.06",
+            "lossChance": "43.9%",
+            "linePercentage": "-38.71%",
+            "score": 5.77,
+            "factorPercentage": "53.00%",
+            "industry": "Financials",
+            "sector": "Finance & Securities"
+        },
+        {
+            "name": "SCC",
+            "price": "฿366.00",
+            "lossChance": "45.0%",
+            "linePercentage": "+13.18%",
+            "score": 5.42,
+            "factorPercentage": "57.80%",
+            "industry": "Property & Construction",
+            "sector": "Construction Materials"
+        },
+        {
+            "name": "TISCO",
+            "price": "฿90.25",
+            "lossChance": "44.9%",
+            "linePercentage": "-4.11%",
+            "score": 5.22,
+            "factorPercentage": "56.60%",
+            "industry": "Financials",
+            "sector": "Banking"
+        },
+        {
+            "name": "ORI",
+            "price": "฿6.85",
+            "lossChance": "43.9%",
+            "linePercentage": "-77.45%",
+            "score": 5.05,
+            "factorPercentage": "56.80%",
+            "industry": "Property & Construction",
+            "sector": "Property Development"
+        },
+        {
+            "name": "KKP",
+            "price": "฿59.25",
+            "lossChance": "44.9%",
+            "linePercentage": "-3.13%",
+            "score": 5.01,
+            "factorPercentage": "58.00%",
+            "industry": "Financials",
+            "sector": "Banking"
+        },
+        {
+            "name": "TPIPP",
+            "price": "฿4.30",
+            "lossChance": "44.4%",
+            "linePercentage": "-68.13%",
+            "score": 4.96,
+            "factorPercentage": "54.40%",
+            "industry": "Resources",
+            "sector": "Energy & Utilities"
+        },
+        {
+            "name": "KTB",
+            "price": "฿11.80",
+            "lossChance": "44.4%",
+            "linePercentage": "-47.50%",
+            "score": 4.72,
+            "factorPercentage": "43.60%",
+            "industry": "Financials",
+            "sector": "Banking"
+        },
+        {
+            "name": "AP",
+            "price": "฿7.35",
+            "lossChance": "44.4%",
+            "linePercentage": "-71.32%",
+            "score": 4.58,
+            "factorPercentage": "54.80%",
+            "industry": "Property & Construction",
+            "sector": "Property Development"
+        },
+        {
+            "name": "GUNKUL",
+            "price": "฿2.58",
+            "lossChance": "44.4%",
+            "linePercentage": "-38.55%",
+            "score": 4.56,
+            "factorPercentage": "40.20%",
+            "industry": "Resources",
+            "sector": "Energy & Utilities"
+        },
+        {
+            "name": "BBL",
+            "price": "฿121.50",
+            "lossChance": "49.7%",
+            "linePercentage": "+65.87%",
+            "score": 4.45,
+            "factorPercentage": "40.40%",
+            "industry": "Financials",
+            "sector": "Banking"
+        },
+        {
+            "name": "WHAUP",
+            "price": "฿3.94",
+            "lossChance": "46.1%",
+            "linePercentage": "-17.42%",
+            "score": 4.4,
+            "factorPercentage": "42.80%",
+            "industry": "Resources",
+            "sector": "Energy & Utilities"
+        },
+        {
+            "name": "HANA",
+            "price": "฿48.25",
+            "lossChance": "49.7%",
+            "linePercentage": "+166.26%",
+            "score": 4.34,
+            "factorPercentage": "47.40%",
+            "industry": "Technology",
+            "sector": "Electronic Components"
+        },
+        {
+            "name": "KBANK",
+            "price": "฿138.50",
+            "lossChance": "46.5%",
+            "linePercentage": "+25.28%",
+            "score": 4.27,
+            "factorPercentage": "42.20%",
+            "industry": "Financials",
+            "sector": "Banking"
+        },
+        {
+            "name": "IVL",
+            "price": "฿39.25",
+            "lossChance": "49.7%",
+            "linePercentage": "+217.39%",
+            "score": 4.26,
+            "factorPercentage": "40.60%",
+            "industry": "Industrials",
+            "sector": "Petrochemicals & Chemicals"
+        },
+        {
+            "name": "QH",
+            "price": "฿2.34",
+            "lossChance": "44.4%",
+            "linePercentage": "-32.49%",
+            "score": 4.23,
+            "factorPercentage": "44.80%",
+            "industry": "Property & Construction",
+            "sector": "Property Development"
+        },
+        {
+            "name": "PTTEP",
+            "price": "฿113.50",
+            "lossChance": "44.4%",
+            "linePercentage": "-55.27%",
+            "score": 4.22,
+            "factorPercentage": "38.20%",
+            "industry": "Resources",
+            "sector": "Energy & Utilities"
+        },
+        {
+            "name": "BCPG",
+            "price": "฿14.70",
+            "lossChance": "46.2%",
+            "linePercentage": "+10.91%",
+            "score": 4.21,
+            "factorPercentage": "45.20%",
+            "industry": "Resources",
+            "sector": "Energy & Utilities"
+        },
+        {
+            "name": "MBK",
+            "price": "฿14.10",
+            "lossChance": "49.7%",
+            "linePercentage": "+50.41%",
+            "score": 4.01,
+            "factorPercentage": "34.80%",
+            "industry": "Property & Construction",
+            "sector": "Property Development"
+        },
+        {
+            "name": "TVO",
+            "price": "฿34.00",
+            "lossChance": "47.9%",
+            "linePercentage": "-8.05%",
+            "score": 3.9,
+            "factorPercentage": "62.80%",
+            "industry": "Agro & Food Industry",
+            "sector": "Food & Beverage"
+        },
+        {
+            "name": "LH",
+            "price": "฿7.80",
+            "lossChance": "51.3%",
+            "linePercentage": "+85.41%",
+            "score": 3.81,
+            "factorPercentage": "40.20%",
+            "industry": "Property & Construction",
+            "sector": "Property Development"
+        },
+        {
+            "name": "INTUCH",
+            "price": "฿55.25",
+            "lossChance": "51.3%",
+            "linePercentage": "+163.66%",
+            "score": 3.64,
+            "factorPercentage": "52.00%",
+            "industry": "Technology",
+            "sector": "Information & Communication Technology"
+        },
+        {
+            "name": "SCB",
+            "price": "฿102.00",
+            "lossChance": "51.3%",
+            "linePercentage": "+99.93%",
+            "score": 3.59,
+            "factorPercentage": "35.80%",
+            "industry": "Financials",
+            "sector": "Banking"
+        },
+        {
+            "name": "TASCO",
+            "price": "฿20.70",
+            "lossChance": "46.8%",
+            "linePercentage": "-25.03%",
+            "score": 3.23,
+            "factorPercentage": "51.60%",
+            "industry": "Property & Construction",
+            "sector": "Construction Materials"
+        },
+        {
+            "name": "MAJOR",
+            "price": "฿21.00",
+            "lossChance": "51.3%",
+            "linePercentage": "+185.53%",
+            "score": 3.03,
+            "factorPercentage": "34.00%",
+            "industry": "Services",
+            "sector": "Media & Publishing"
+        },
+        {
+            "name": "PTT",
+            "price": "฿39.50",
+            "lossChance": "48.7%",
+            "linePercentage": "-2.48%",
+            "score": 2.63,
+            "factorPercentage": "25.60%",
+            "industry": "Resources",
+            "sector": "Energy & Utilities"
+        },
+        {
+            "name": "BCP",
+            "price": "฿28.50",
+            "lossChance": "57.8%",
+            "linePercentage": "+780.83%",
+            "score": 1.57,
+            "factorPercentage": "21.20%",
+            "industry": "Resources",
+            "sector": "Energy & Utilities"
+        },
+        {
+            "name": "PTTGC",
+            "price": "฿62.75",
+            "lossChance": "57.7%",
+            "linePercentage": "+89.36%",
+            "score": 0.94,
+            "factorPercentage": "24.20%",
+            "industry": "Industrials",
+            "sector": "Petrochemicals & Chemicals"
+        },
+        {
+            "name": "TOP",
+            "price": "฿58.75",
+            "lossChance": "57.7%",
+            "linePercentage": "+100.00%",
+            "score": 0.01,
+            "factorPercentage": "16.40%",
+            "industry": "Resources",
+            "sector": "Energy & Utilities"
+        }
+    ]
+}
