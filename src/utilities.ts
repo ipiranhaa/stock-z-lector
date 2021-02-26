@@ -24,6 +24,20 @@ const byScore = (aDetail: JittaStockDetail, bDetail: JittaStockDetail) => {
 // ─── MAIN ───────────────────────────────────────────────────────────────────────
 //
 
+export const retry = async (
+  promiseFactory: () => Promise<string>,
+  retryCount: number = 3
+): Promise<string> => {
+  try {
+    return await promiseFactory()
+  } catch (error) {
+    if (retryCount <= 0) {
+      throw error
+    }
+    return await retry(promiseFactory, retryCount - 1)
+  }
+}
+
 export interface StockDetail extends JittaStockDetail, Industry {}
 
 export const prioratiseStock = (stockDetailList: StockDetail[]) => {
@@ -38,4 +52,4 @@ export const prioratiseStock = (stockDetailList: StockDetail[]) => {
 }
 
 export const getElementValue = async (element: ElementHandle) =>
-  await element.evaluate((element: Element) => element.innerHTML)
+  await retry(() => element.evaluate((element: Element) => element.innerHTML))

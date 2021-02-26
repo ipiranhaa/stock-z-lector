@@ -1,5 +1,5 @@
 import { Browser, ElementHandle, Page } from 'puppeteer'
-import { getElementValue } from './utilities'
+import { getElementValue, retry } from './utilities'
 
 //
 // ─── SETTINGS ───────────────────────────────────────────────────────────────────
@@ -86,10 +86,10 @@ const getStockDetail = async (browser: Browser, stock: string) => {
     const lossChance = await getElementValue(lossChanceElements[0])
 
     const lineElements = await page.$x(lineXPath)
-    const linePercentage = await getLine(lineElements)
+    const linePercentage = await retry(() => getLine(lineElements))
 
     const scoreElements = await page.$x(scoreXPath)
-    const score = await getScore(scoreElements)
+    const score = await retry(() => getScore(scoreElements))
 
     // Factors
     const factorElements = await page.$x(factorXPath)
