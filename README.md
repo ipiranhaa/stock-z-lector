@@ -1,7 +1,12 @@
 # stock-z-lector
 
-### SET50 x SETHD
+Thai stock selector automation which is generating the index every weekday.
+
+### SET50
 [JSON](https://raw.githubusercontent.com/ipiranhaa/stock-z-lector/main/src/indexing/SET50.json)
 
-### SET100 x SETHD
+### SET100
 [JSON](https://raw.githubusercontent.com/ipiranhaa/stock-z-lector/main/src/indexing/SET100.json)
+
+### SETHD
+[JSON](https://raw.githubusercontent.com/ipiranhaa/stock-z-lector/main/src/indexing/SETHD.json)
