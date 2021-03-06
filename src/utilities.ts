@@ -42,18 +42,19 @@ const createDirectory = (dirPath: string) => {
 // ─── MAIN ───────────────────────────────────────────────────────────────────────
 //
 
-export const retry = async (
-  promiseFactory: () => Promise<string>,
+export const handleGetElements = async (
+  promiseFactory: () => Promise<ElementHandle[]>,
   retryCount: number = 3
-): Promise<string> => {
-  try {
-    return await promiseFactory()
-  } catch (error) {
-    if (retryCount <= 0) {
-      throw error
-    }
-    return await retry(promiseFactory, retryCount - 1)
+): Promise<ElementHandle[]> => {
+  const elements = await promiseFactory()
+
+  if (elements.length !== 0) return elements
+
+  if (retryCount <= 0) {
+    throw new Error('Cannot find elements from Xpath')
   }
+
+  return await handleGetElements(promiseFactory, retryCount - 1)
 }
 
 export interface StockDetail extends JittaStockDetail, Industry, TradingViewDetail {}
@@ -70,7 +71,7 @@ export const prioratiseStock = (stockDetailList: StockDetail[]) => {
 }
 
 export const getElementValue = async (element: ElementHandle) =>
-  await retry(() => element.evaluate((element: Element) => element.innerHTML))
+  element.evaluate((element: Element) => element.innerHTML)
 
 export const stampDatetime = (data: StockDetail[]) =>
   JSON.stringify(

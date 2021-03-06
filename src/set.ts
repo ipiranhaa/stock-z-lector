@@ -1,5 +1,5 @@
 import { Browser, ElementHandle, Page } from 'puppeteer'
-import { getElementValue } from './utilities'
+import { getElementValue, handleGetElements } from './utilities'
 
 type StockIndexing = 'SET50' | 'SET100' | 'SETHD'
 
@@ -56,8 +56,8 @@ export const getStockIndustry = async (browser: Browser, stocks: string[]) => {
     await page.goto(
       `https://www.set.or.th/set/companyprofile.do?symbol=${stock}&language=en&country=US`
     )
-    const industryElements = await page.$x(industryXPath)
-    const sectorElements = await page.$x(sectorXPath)
+    const industryElements = await handleGetElements(() => page.$x(industryXPath))
+    const sectorElements = await handleGetElements(() => page.$x(sectorXPath))
     const industry = await getElementValue(industryElements[0])
     const sector = await getElementValue(sectorElements[0])
     result[stock] = {
@@ -80,7 +80,7 @@ export const getStockByIndex = async (browser: Browser, indexing: StockIndexing)
   await page.goto(
     `https://marketdata.set.or.th/mkt/sectorquotation.do?sector=${indexing}&language=en&country=US`
   )
-  const elements = await page.$x(tableBodyXPath)
+  const elements = await handleGetElements(() => page.$x(tableBodyXPath))
   const stocks = await getAllStockByElements(elements)
   page.close()
 

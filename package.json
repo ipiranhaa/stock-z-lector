@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "start": "ts-node src/app.ts --unhandled-rejections=strict",
-    "dev": "nodemon --watch 'src/**' --ext 'ts,json' --ignore 'src/**/*.spec.ts' --exec 'ts-node src/app.ts'",
+    "dev": "nodemon --watch 'src/**' --ignore 'src/indexing/' --ext 'ts,json' --ignore 'src/**/*.spec.ts' --exec 'ts-node src/app.ts'",
     "ok": "npx tsc && eslint"
   },
   "dependencies": {

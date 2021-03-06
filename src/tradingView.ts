@@ -1,5 +1,5 @@
 import { Browser, Page, ElementHandle } from 'puppeteer'
-import { getElementValue } from './utilities'
+import { getElementValue, handleGetElements } from './utilities'
 
 //
 // ─── SETTINGS ───────────────────────────────────────────────────────────────────
@@ -51,8 +51,8 @@ export const getStockTechnical = async (browser: Browser, stocks: string[]) => {
     // Wait for 1 second
     await new Promise((resolve) => setTimeout(resolve, 1000))
 
-    const topDetailElements = await page.$x(topDetailXPath)
-    const adviceElements = await page.$x(summaryXPath)
+    const topDetailElements = await handleGetElements(() => page.$x(topDetailXPath))
+    const adviceElements = await handleGetElements(() => page.$x(summaryXPath))
     const pe = await getPE(topDetailElements)
     const advice = await getElementValue(adviceElements[0])
     result[stock] = {

@@ -1,5 +1,5 @@
 import { Browser, ElementHandle, Page } from 'puppeteer'
-import { getElementValue, retry } from './utilities'
+import { getElementValue, handleGetElements } from './utilities'
 
 //
 // ─── SETTINGS ───────────────────────────────────────────────────────────────────
@@ -79,17 +79,17 @@ const getStockDetail = async (browser: Browser, stock: string) => {
     await page.setViewport({ width: 1366, height: 768 })
     await page.goto(`https://www.jitta.com/stock/bkk:${stock}`)
 
-    const priceElements = await page.$x(priceXPath)
+    const priceElements = await handleGetElements(() => page.$x(priceXPath))
     const price = await getElementValue(priceElements[0])
 
-    const lossChanceElements = await page.$x(lossChanceXPath)
+    const lossChanceElements = await handleGetElements(() => page.$x(lossChanceXPath))
     const lossChance = await getElementValue(lossChanceElements[0])
 
-    const lineElements = await page.$x(lineXPath)
-    const linePercentage = await retry(() => getLine(lineElements))
+    const lineElements = await handleGetElements(() => page.$x(lineXPath))
+    const linePercentage = await getLine(lineElements)
 
-    const scoreElements = await page.$x(scoreXPath)
-    const score = await retry(() => getScore(scoreElements))
+    const scoreElements = await handleGetElements(() => page.$x(scoreXPath))
+    const score = await getScore(scoreElements)
 
     // Factors
     const factorElements = await page.$x(factorXPath)
