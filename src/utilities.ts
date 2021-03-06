@@ -93,6 +93,8 @@ export const writingManager = (SET100: string, SET50: string, SET1HD: string) =>
     directoryFormat,
     dateFormatOption
   )
+  const historyPath = `src/indexing/${dirName}`
+  createDirectory(historyPath)
 
   // Main files
   fs.writeFile('src/indexing/SET100.json', SET100, (err) => {
@@ -111,8 +113,6 @@ export const writingManager = (SET100: string, SET50: string, SET1HD: string) =>
   })
 
   // History files
-  const historyPath = `src/indexing/${dirName}`
-  createDirectory(historyPath)
   fs.writeFile(`${historyPath}/SET100.json`, SET100, (err) => {
     if (err) throw err
     console.log('Save history of SET100.json DONE')
