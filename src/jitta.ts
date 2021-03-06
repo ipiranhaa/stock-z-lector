@@ -79,6 +79,9 @@ const getStockDetail = async (browser: Browser, stock: string) => {
     await page.setViewport({ width: 1366, height: 768 })
     await page.goto(`https://www.jitta.com/stock/bkk:${stock}`)
 
+    // Wait for 1 second
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+
     const priceElements = await handleGetElements(() => page.$x(priceXPath))
     const price = await getElementValue(priceElements[0])
 
