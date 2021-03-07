@@ -25,7 +25,7 @@ const factorXPath = '//*[@id="app"]/div/div[3]/div/div/div/div[3]/div[1]/div/div
 
 const getLine = async (elements: ElementHandle[]) => {
   const selectedElement = elements[0]
-  const getPercentValue = (html: string) => html.split('%')[0]
+  const getPercentValue = (html: string) => html.split('%')[0].replace('&gt; ', '')
   const percentHtml = await selectedElement.evaluate((element: Element) => element.innerHTML)
   const percent = getPercentValue(percentHtml)
   const indicator = await selectedElement.$eval('span', (element: Element) => element.innerHTML)
