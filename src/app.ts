@@ -1,6 +1,6 @@
 import puppeteer, { Browser } from 'puppeteer'
 
-import { getStockByIndex, getStockIndustry } from './set'
+import { getStockByIndex, getStockProfile } from './set'
 import { getAllStockDetail, JittaStockDetail } from './jitta'
 import { getStockTechnical } from './tradingView'
 import { prioratiseStock, StockDetail, stampDatetime, writingManager } from './utilities'
@@ -13,7 +13,7 @@ import { prioratiseStock, StockDetail, stampDatetime, writingManager } from './u
   const set50Stocks = await getStockByIndex(browser, 'SET50')
   const set100Stocks = await getStockByIndex(browser, 'SET100')
   const setHDStocks = await getStockByIndex(browser, 'SETHD')
-  const set100StocksWithIndustry = await getStockIndustry(browser, set100Stocks)
+  const set100StockProfiles = await getStockProfile(browser, set100Stocks)
   const allJittaStockDetail = await getAllStockDetail(browser, set100Stocks)
   const set100TechnicalStocks = await getStockTechnical(browser, set100Stocks)
 
@@ -22,7 +22,7 @@ import { prioratiseStock, StockDetail, stampDatetime, writingManager } from './u
   const mergedStockDetail: StockDetail[] = allJittaStockDetail.map((jittaDetail) => ({
     ...jittaDetail,
     ...set100TechnicalStocks[jittaDetail.name],
-    ...set100StocksWithIndustry[jittaDetail.name],
+    ...set100StockProfiles[jittaDetail.name],
   }))
 
   const sortedSET100Result = prioratiseStock(mergedStockDetail)

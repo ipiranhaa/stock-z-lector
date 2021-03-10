@@ -29,7 +29,6 @@ const getPE = async (elements: ElementHandle[]) => {
 //
 
 export interface TradingViewDetail {
-  pe: number
   advice: string
 }
 
@@ -58,7 +57,6 @@ export const getStockTechnical = async (browser: Browser, stocks: string[]) => {
     const pe = await getPE(topDetailElements)
     const advice = await getElementValue(adviceElements[0])
     result[stock] = {
-      pe: Number(pe),
       advice,
     }
     console.info(`Get ${stock} technicals... DONE`)

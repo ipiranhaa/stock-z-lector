@@ -4,7 +4,7 @@ import { format, utcToZonedTime } from 'date-fns-tz'
 import { ElementHandle } from 'puppeteer'
 
 import { JittaStockDetail } from './jitta'
-import { Industry } from './set'
+import { SETStockDetail } from './set'
 import { TradingViewDetail } from './tradingView'
 
 const dateTimeFormat = 'dd/MM/yyyy HH:mm:ss'
@@ -57,7 +57,7 @@ export const handleGetElements = async (
   return await handleGetElements(promiseFactory, retryCount - 1)
 }
 
-export interface StockDetail extends JittaStockDetail, Industry, TradingViewDetail {}
+export interface StockDetail extends JittaStockDetail, SETStockDetail, TradingViewDetail {}
 
 export const prioratiseStock = (stockDetailList: StockDetail[]) => {
   /* 

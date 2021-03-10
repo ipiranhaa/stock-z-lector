@@ -12,6 +12,10 @@ const userAgent =
 
 const tableBodyXPath = '//*[@id="maincontent"]/div/div[2]/div/div/div/div[3]/table/tbody/tr'
 
+const peXPath = '//*[@id="maincontent"]/div/div[3]/table/tbody/tr[2]/td/div[2]/div[1]/div[2]'
+const pbvXPath = '//*[@id="maincontent"]/div/div[3]/table/tbody/tr[2]/td/div[3]/div[1]/div[2]'
+const dvdYieldXPath = '//*[@id="maincontent"]/div/div[3]/table/tbody/tr[2]/td/div[2]/div[2]/div[2]'
+
 const industryXPath =
   '//*[@id="maincontent"]/div/div[3]/table/tbody/tr[3]/td/div/div[1]/div[2]/div[2]'
 const sectorXPath =
@@ -35,40 +39,57 @@ const getAllStockByElements = async (elements: ElementHandle[]) => {
 // ─── MAIN ───────────────────────────────────────────────────────────────────────
 //
 
-export interface Industry {
+export interface SETStockDetail {
+  pe: number
+  pbv: number
+  dvdYield: string
   industry: string
   sector: string
 }
 
-export interface StockWithIndustry {
-  [key: string]: Industry
+export interface SETStockDetailIndex {
+  [key: string]: SETStockDetail
 }
 
-export const getStockIndustry = async (browser: Browser, stocks: string[]) => {
+export const getStockProfile = async (browser: Browser, stocks: string[]) => {
   const page: Page = await browser.newPage()
   await page.setUserAgent(userAgent)
-  const result: StockWithIndustry = {}
+  const result: SETStockDetailIndex = {}
 
   for (let index = 0; index < stocks.length; index++) {
     const stock = stocks[index]
-    console.info(`Getting ${stock} industry...`)
+    console.info(`Getting SET ${stock} profile...`)
 
     await page.goto(
       `https://www.set.or.th/set/companyprofile.do?symbol=${stock}&language=en&country=US`
     )
 
+    await page.waitForXPath(peXPath)
+    await page.waitForXPath(pbvXPath)
+    await page.waitForXPath(dvdYieldXPath)
     await page.waitForXPath(industryXPath)
     await page.waitForXPath(sectorXPath)
 
+    const peElements = await handleGetElements(() => page.$x(peXPath))
+    const pbvElements = await handleGetElements(() => page.$x(pbvXPath))
+    const dvdYieldElements = await handleGetElements(() => page.$x(dvdYieldXPath))
     const industryElements = await handleGetElements(() => page.$x(industryXPath))
     const sectorElements = await handleGetElements(() => page.$x(sectorXPath))
+
+    const pe = await getElementValue(peElements[0])
+    const pbv = await getElementValue(pbvElements[0])
+    const dvdYield = await getElementValue(dvdYieldElements[0])
     const industry = await getElementValue(industryElements[0])
     const sector = await getElementValue(sectorElements[0])
+
     result[stock] = {
+      pe: Number(pe),
+      pbv: Number(pbv),
+      dvdYield: `${dvdYield.trim()}%`,
       industry: industry.replace('&amp;', '&'),
       sector: sector.replace('&amp;', '&'),
     }
-    console.info(`Get ${stock} industry... DONE`)
+    console.info(`Get SET ${stock} profile... DONE`)
   }
 
   page.close()
