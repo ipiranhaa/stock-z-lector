@@ -1,5 +1,5 @@
 {
-    "createdAt": "10/03/2021 10:36:17",
+    "createdAt": "10/03/2021 11:11:25",
     "results": [
         {
             "name": "TCAP",
@@ -177,7 +177,7 @@
             "score": 4.1,
             "factorPercentage": "39.60%",
             "pe": 10.2,
-            "advice": "Buy",
+            "advice": "Strong Buy",
             "industry": "Financials",
             "sector": "Banking"
         },
@@ -189,7 +189,7 @@
             "score": 3.93,
             "factorPercentage": "40.60%",
             "pe": 13.4,
-            "advice": "Buy",
+            "advice": "Strong Buy",
             "industry": "Property & Construction",
             "sector": "Property Development"
         },
@@ -201,7 +201,7 @@
             "score": 3.87,
             "factorPercentage": "39.20%",
             "pe": 12.2,
-            "advice": "Strong Buy",
+            "advice": "Buy",
             "industry": "Property & Construction",
             "sector": "Property Development"
         },

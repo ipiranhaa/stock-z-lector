@@ -1,5 +1,5 @@
 {
-    "createdAt": "10/03/2021 10:36:17",
+    "createdAt": "10/03/2021 11:11:25",
     "results": [
         {
             "name": "COM7",
@@ -81,7 +81,7 @@
             "score": 6.8,
             "factorPercentage": "72.60%",
             "pe": 30.2,
-            "advice": "Strong Buy",
+            "advice": "Buy",
             "industry": "Services",
             "sector": "Health Care Services"
         },
@@ -93,7 +93,7 @@
             "score": 6.8,
             "factorPercentage": "77.00%",
             "pe": 33.88,
-            "advice": "Strong Buy",
+            "advice": "Buy",
             "industry": "Services",
             "sector": "Health Care Services"
         },
@@ -129,7 +129,7 @@
             "score": 6.28,
             "factorPercentage": "72.40%",
             "pe": 12.4,
-            "advice": "Sell",
+            "advice": "Neutral",
             "industry": "Services",
             "sector": "Transportation & Logistics"
         },
@@ -225,7 +225,7 @@
             "score": 5.83,
             "factorPercentage": "62.60%",
             "pe": 9.5,
-            "advice": "Strong Buy",
+            "advice": "Buy",
             "industry": "Agro & Food Industry",
             "sector": "Food & Beverage"
         },
@@ -525,7 +525,7 @@
             "score": 4.41,
             "factorPercentage": "52.20%",
             "pe": 38.5,
-            "advice": "Buy",
+            "advice": "Strong Buy",
             "industry": "Technology",
             "sector": "Information & Communication Technology"
         },
@@ -633,7 +633,7 @@
             "score": 4.1,
             "factorPercentage": "39.60%",
             "pe": 10.2,
-            "advice": "Buy",
+            "advice": "Strong Buy",
             "industry": "Financials",
             "sector": "Banking"
         },
@@ -645,7 +645,7 @@
             "score": 4.04,
             "factorPercentage": "55.40%",
             "pe": 15.5,
-            "advice": "Buy",
+            "advice": "Neutral",
             "industry": "Resources",
             "sector": "Energy & Utilities"
         },
@@ -681,7 +681,7 @@
             "score": 3.93,
             "factorPercentage": "40.60%",
             "pe": 13.4,
-            "advice": "Buy",
+            "advice": "Strong Buy",
             "industry": "Property & Construction",
             "sector": "Property Development"
         },
@@ -717,7 +717,7 @@
             "score": 3.87,
             "factorPercentage": "39.20%",
             "pe": 12.2,
-            "advice": "Strong Buy",
+            "advice": "Buy",
             "industry": "Property & Construction",
             "sector": "Property Development"
         },
@@ -753,7 +753,7 @@
             "score": 3.77,
             "factorPercentage": "40.60%",
             "pe": 202.2,
-            "advice": "Buy",
+            "advice": "Strong Buy",
             "industry": "Services",
             "sector": "Media & Publishing"
         },
@@ -801,7 +801,7 @@
             "score": 3.63,
             "factorPercentage": "48.00%",
             "pe": null,
-            "advice": "Neutral",
+            "advice": "Strong Sell",
             "industry": "Resources",
             "sector": "Energy & Utilities"
         },
@@ -849,7 +849,7 @@
             "score": 3.57,
             "factorPercentage": "38.60%",
             "pe": 19.5,
-            "advice": "Neutral",
+            "advice": "Sell",
             "industry": "Resources",
             "sector": "Energy & Utilities"
         },
@@ -1005,7 +1005,7 @@
             "score": 2.95,
             "factorPercentage": "26.60%",
             "pe": 86.74,
-            "advice": "Neutral",
+            "advice": "Buy",
             "industry": "Resources",
             "sector": "Energy & Utilities"
         },
@@ -1041,7 +1041,7 @@
             "score": 2.49,
             "factorPercentage": "27.80%",
             "pe": null,
-            "advice": "Strong Buy",
+            "advice": "Buy",
             "industry": "Services",
             "sector": "Tourism & Leisure"
         },
@@ -1161,7 +1161,7 @@
             "score": 0.69,
             "factorPercentage": "24.40%",
             "pe": null,
-            "advice": "Neutral",
+            "advice": "Buy",
             "industry": "Resources",
             "sector": "Energy & Utilities"
         },
