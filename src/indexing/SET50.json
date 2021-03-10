@@ -1,5 +1,5 @@
 {
-    "createdAt": "10/03/2021 10:36:17",
+    "createdAt": "10/03/2021 11:11:25",
     "results": [
         {
             "name": "COM7",
@@ -117,7 +117,7 @@
             "score": 5.83,
             "factorPercentage": "62.60%",
             "pe": 9.5,
-            "advice": "Strong Buy",
+            "advice": "Buy",
             "industry": "Agro & Food Industry",
             "sector": "Food & Beverage"
         },
@@ -321,7 +321,7 @@
             "score": 4.1,
             "factorPercentage": "39.60%",
             "pe": 10.2,
-            "advice": "Buy",
+            "advice": "Strong Buy",
             "industry": "Financials",
             "sector": "Banking"
         },
@@ -345,7 +345,7 @@
             "score": 3.93,
             "factorPercentage": "40.60%",
             "pe": 13.4,
-            "advice": "Buy",
+            "advice": "Strong Buy",
             "industry": "Property & Construction",
             "sector": "Property Development"
         },
@@ -417,7 +417,7 @@
             "score": 3.63,
             "factorPercentage": "48.00%",
             "pe": null,
-            "advice": "Neutral",
+            "advice": "Strong Sell",
             "industry": "Resources",
             "sector": "Energy & Utilities"
         },
