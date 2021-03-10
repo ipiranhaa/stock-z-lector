@@ -48,8 +48,10 @@ export const getStockTechnical = async (browser: Browser, stocks: string[]) => {
 
     await page.goto(`https://www.tradingview.com/symbols/SET-${stock}/technicals/`)
 
-    // Wait for 1 second
+    // Wait for 1 second to wait data display
     await new Promise((resolve) => setTimeout(resolve, 1000))
+    await page.waitForXPath(topDetailXPath)
+    await page.waitForXPath(summaryXPath)
 
     const topDetailElements = await handleGetElements(() => page.$x(topDetailXPath))
     const adviceElements = await handleGetElements(() => page.$x(summaryXPath))

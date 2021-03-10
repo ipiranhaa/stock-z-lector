@@ -56,6 +56,10 @@ export const getStockIndustry = async (browser: Browser, stocks: string[]) => {
     await page.goto(
       `https://www.set.or.th/set/companyprofile.do?symbol=${stock}&language=en&country=US`
     )
+
+    await page.waitForXPath(industryXPath)
+    await page.waitForXPath(sectorXPath)
+
     const industryElements = await handleGetElements(() => page.$x(industryXPath))
     const sectorElements = await handleGetElements(() => page.$x(sectorXPath))
     const industry = await getElementValue(industryElements[0])
@@ -80,6 +84,9 @@ export const getStockByIndex = async (browser: Browser, indexing: StockIndexing)
   await page.goto(
     `https://marketdata.set.or.th/mkt/sectorquotation.do?sector=${indexing}&language=en&country=US`
   )
+
+  await page.waitForXPath(tableBodyXPath)
+
   const elements = await handleGetElements(() => page.$x(tableBodyXPath))
   const stocks = await getAllStockByElements(elements)
   page.close()
