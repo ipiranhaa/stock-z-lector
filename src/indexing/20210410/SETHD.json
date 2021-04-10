@@ -1,5 +1,5 @@
 {
-    "createdAt": "10/04/2021 10:20:51",
+    "createdAt": "10/04/2021 19:42:12",
     "results": [
         {
             "name": "TCAP",
@@ -46,7 +46,7 @@
         {
             "name": "SCC",
             "price": "฿408.00",
-            "lossChance": "45.3%",
+            "lossChance": "45.2%",
             "linePercentage": "+26.16%",
             "score": 5.42,
             "factorPercentage": "57.80%",

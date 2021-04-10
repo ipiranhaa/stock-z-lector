@@ -1,5 +1,5 @@
 {
-    "createdAt": "10/04/2021 10:20:51",
+    "createdAt": "10/04/2021 19:42:12",
     "results": [
         {
             "name": "COM7",
@@ -396,7 +396,7 @@
         {
             "name": "SCC",
             "price": "฿408.00",
-            "lossChance": "45.3%",
+            "lossChance": "45.2%",
             "linePercentage": "+26.16%",
             "score": 5.42,
             "factorPercentage": "57.80%",
@@ -508,7 +508,7 @@
         {
             "name": "ADVANC",
             "price": "฿169.50",
-            "lossChance": "45.0%",
+            "lossChance": "45.1%",
             "linePercentage": "-9.80%",
             "score": 4.89,
             "factorPercentage": "48.80%",
@@ -550,7 +550,7 @@
         {
             "name": "GFPT",
             "price": "฿11.80",
-            "lossChance": "46.3%",
+            "lossChance": "46.2%",
             "linePercentage": "-0.51%",
             "score": 4.62,
             "factorPercentage": "49.80%",
