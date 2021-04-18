@@ -1,3 +1,13 @@
+export type Industry =
+  | 'AGRO'
+  | 'CONSUMP'
+  | 'FINCIAL'
+  | 'INDUS'
+  | 'PROPCON'
+  | 'RESOURC'
+  | 'SERVICE'
+  | 'TECH'
+
 export const industries = {
   AGRO: 'Agro & Food Industry',
   CONSUMP: 'Consumer Products',
@@ -37,7 +47,7 @@ export const sectors = {
   TOURISM: 'Tourisms & Leisure',
   TRANS: 'Transportation & Logistics',
   ETRON: 'Electronic Components',
-  ICT: 'Information & Communication Technolog y',
+  ICT: 'Information & Communication Technology',
 }
 
 export const relations = {

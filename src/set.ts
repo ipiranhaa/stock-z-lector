@@ -1,7 +1,8 @@
 import { Browser, ElementHandle, Page } from 'puppeteer'
+import { industries, Industry } from './configuration/industries'
 import { getElementValue, handleGetElements } from './utilities'
 
-type StockIndexing = 'SET50' | 'SET100' | 'SETHD'
+type StockIndexing = 'SET50' | 'SET100' | 'SETHD' | 'MAI'
 
 //
 // ─── SETTINGS ───────────────────────────────────────────────────────────────────
@@ -97,14 +98,22 @@ export const getStockProfile = async (browser: Browser, stocks: string[]) => {
   return result
 }
 
-export const getStockByIndex = async (browser: Browser, indexing: StockIndexing) => {
-  console.info(`Getting ${indexing} stock list...`)
+export const getStockByIndex = async (
+  browser: Browser,
+  indexing: StockIndexing,
+  industry?: Industry
+) => {
+  const industryLogPrefix = industry ? ` - ${industry}` : ''
+  console.info(`Getting ${indexing}${industryLogPrefix} stock list...`)
+
+  let url = `https://marketdata.set.or.th/mkt/sectorquotation.do?sector=${indexing}&language=en&country=US`
+  if (industry) {
+    url = `https://marketdata.set.or.th/mkt/sectorquotation.do?market=${indexing}&sector=${industry}&language=en&country=US`
+  }
 
   const page: Page = await browser.newPage()
   await page.setUserAgent(userAgent)
-  await page.goto(
-    `https://marketdata.set.or.th/mkt/sectorquotation.do?sector=${indexing}&language=en&country=US`
-  )
+  await page.goto(url)
 
   await page.waitForXPath(tableBodyXPath)
 
@@ -112,9 +121,22 @@ export const getStockByIndex = async (browser: Browser, indexing: StockIndexing)
   const stocks = await getAllStockByElements(elements)
   page.close()
 
-  console.info(`Get ${indexing} stock list... DONE`)
+  console.info(`Get ${indexing}${industryLogPrefix} stock list... DONE`)
 
   return stocks
+}
+
+export const getMAIStock = async (browser: Browser) => {
+  const industryCodeList = Object.keys(industries) as Industry[]
+  const maiPromises = industryCodeList.map((industry) => getStockByIndex(browser, 'MAI', industry))
+
+  const result = await Promise.all(maiPromises).then((stockByIndustries) => {
+    return stockByIndustries.reduce((total, stocks) => {
+      return [...total, ...stocks]
+    }, [])
+  })
+
+  return result
 }
 
 export const intersecStocks = (listA: string[], listB: string[]) => {

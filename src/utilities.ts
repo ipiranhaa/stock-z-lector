@@ -44,7 +44,7 @@ const createDirectory = (dirPath: string) => {
 
 export const handleGetElements = async (
   promiseFactory: () => Promise<ElementHandle[]>,
-  retryCount: number = 3
+  retryCount = 3
 ): Promise<ElementHandle[]> => {
   const elements = await promiseFactory()
 
@@ -73,21 +73,36 @@ export const prioratiseStock = (stockDetailList: StockDetail[]) => {
 export const getElementValue = async (element: ElementHandle) =>
   element.evaluate((element: Element) => element.innerHTML)
 
-export const stampDatetime = (data: StockDetail[]) =>
-  JSON.stringify(
-    {
-      createdAt: format(
-        utcToZonedTime(new Date(), dateFormatOption.timeZone),
-        dateTimeFormat,
-        dateFormatOption
-      ),
-      results: data,
-    },
-    null,
-    4
-  )
+export const parsingSETAndMAIStocks = (
+  stocks: StockDetail[],
+  maiStockList: string[]
+): StockDetail[][] => {
+  const set100: StockDetail[] = []
+  const mai: StockDetail[] = []
 
-export const writingManager = (SET100: string, SET50: string, SET1HD: string) => {
+  for (let index = 0; index < stocks.length; index++) {
+    const stock = stocks[index]
+    if (maiStockList.includes(stock.name.toUpperCase())) {
+      mai.push(stock)
+    } else {
+      set100.push(stock)
+    }
+  }
+
+  return [set100, mai]
+}
+
+export const stampDatetime = (data: StockDetail[]) =>
+  JSON.stringify({
+    createdAt: format(
+      utcToZonedTime(new Date(), dateFormatOption.timeZone),
+      dateTimeFormat,
+      dateFormatOption
+    ),
+    results: data,
+  })
+
+export const writingManager = (SET100: string, SET50: string, SET1HD: string, MAI: string) => {
   const dirName = format(
     utcToZonedTime(new Date(), dateFormatOption.timeZone),
     directoryFormat,
@@ -112,6 +127,11 @@ export const writingManager = (SET100: string, SET50: string, SET1HD: string) =>
     console.log('Save SETHD.json DONE')
   })
 
+  fs.writeFile('src/indexing/MAI.json', MAI, (err) => {
+    if (err) throw err
+    console.log('Save MAI.json DONE')
+  })
+
   // History files
   fs.writeFile(`${historyPath}/SET100.json`, SET100, (err) => {
     if (err) throw err
@@ -126,5 +146,10 @@ export const writingManager = (SET100: string, SET50: string, SET1HD: string) =>
   fs.writeFile(`${historyPath}/SETHD.json`, SET1HD, (err) => {
     if (err) throw err
     console.log('Save history of SETHD.json DONE')
+  })
+
+  fs.writeFile(`${historyPath}/MAI.json`, MAI, (err) => {
+    if (err) throw err
+    console.log('Save history of MAI.json DONE')
   })
 }

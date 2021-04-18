@@ -1,9 +1,15 @@
 import puppeteer, { Browser } from 'puppeteer'
 
-import { getStockByIndex, getStockProfile } from './set'
+import { getStockByIndex, getMAIStock, getStockProfile } from './set'
 import { getAllStockDetail, JittaStockDetail } from './jitta'
-import { getStockTechnical } from './tradingView'
-import { prioratiseStock, StockDetail, stampDatetime, writingManager } from './utilities'
+import { getStockTechnical, TradingViewStock } from './tradingView'
+import {
+  prioratiseStock,
+  StockDetail,
+  stampDatetime,
+  writingManager,
+  parsingSETAndMAIStocks,
+} from './utilities'
 ;(async () => {
   const browser: Browser = await puppeteer.launch({
     headless: true,
@@ -13,19 +19,33 @@ import { prioratiseStock, StockDetail, stampDatetime, writingManager } from './u
   const set50Stocks = await getStockByIndex(browser, 'SET50')
   const set100Stocks = await getStockByIndex(browser, 'SET100')
   const setHDStocks = await getStockByIndex(browser, 'SETHD')
-  const set100StockProfiles = await getStockProfile(browser, set100Stocks)
-  const allJittaStockDetail = await getAllStockDetail(browser, set100Stocks)
+  const maiStocks = await getMAIStock(browser)
+  const summaryStocks = [...set100Stocks, ...maiStocks]
+
+  const allStockProfiles = await getStockProfile(browser, summaryStocks)
+  const allJittaStockDetail = await getAllStockDetail(browser, summaryStocks)
+
+  // Note: Manual resolve advice because tradingview does not have some mai stocks detail.
   const set100TechnicalStocks = await getStockTechnical(browser, set100Stocks)
+  const maiTechnicalStocks = maiStocks.reduce((summary, name) => {
+    const manipulatedSummary = summary
+    manipulatedSummary[name] = {
+      advice: '',
+    }
+    return manipulatedSummary
+  }, {} as TradingViewStock)
+  const allTechnicalStocks: TradingViewStock = { ...set100TechnicalStocks, ...maiTechnicalStocks }
 
   await browser.close()
 
   const mergedStockDetail: StockDetail[] = allJittaStockDetail.map((jittaDetail) => ({
     ...jittaDetail,
-    ...set100TechnicalStocks[jittaDetail.name],
-    ...set100StockProfiles[jittaDetail.name],
+    ...allTechnicalStocks[jittaDetail.name],
+    ...allStockProfiles[jittaDetail.name],
   }))
 
-  const sortedSET100Result = prioratiseStock(mergedStockDetail)
+  const sortedAllResult = prioratiseStock(mergedStockDetail)
+  const [sortedSET100Result, sortedMAIResult] = parsingSETAndMAIStocks(sortedAllResult, maiStocks)
   const sortedSET50Result = sortedSET100Result.filter((stock: JittaStockDetail) =>
     set50Stocks.includes(stock.name.toUpperCase())
   )
@@ -36,6 +56,7 @@ import { prioratiseStock, StockDetail, stampDatetime, writingManager } from './u
   const formattedSET100Json = stampDatetime(sortedSET100Result)
   const formattedSET50Json = stampDatetime(sortedSET50Result)
   const formattedSETHDJson = stampDatetime(sortedSETHDResult)
+  const formattedMAIJson = stampDatetime(sortedMAIResult)
 
-  writingManager(formattedSET100Json, formattedSET50Json, formattedSETHDJson)
+  writingManager(formattedSET100Json, formattedSET50Json, formattedSETHDJson, formattedMAIJson)
 })()
