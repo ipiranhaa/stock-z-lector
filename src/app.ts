@@ -17,18 +17,29 @@ import { getStockEvent } from './settrade'
     args: ['--no-sandbox', '--disable-setuid-sandbox', '--start-maximized'],
   })
 
-  const set50Stocks = await getStockByIndex(browser, 'SET50')
-  const set100Stocks = await getStockByIndex(browser, 'SET100')
-  const setHDStocks = await getStockByIndex(browser, 'SETHD')
-  const maiStocks = await getMAIStock(browser)
+  const [set50Stocks, set100Stocks, setHDStocks, maiStocks] = await Promise.all([
+    getStockByIndex(browser, 'SET50'),
+    getStockByIndex(browser, 'SET100'),
+    getStockByIndex(browser, 'SETHD'),
+    getMAIStock(browser),
+  ])
   const summaryStocks = [...set100Stocks, ...maiStocks]
 
-  const allStockProfiles = await getStockProfile(browser, summaryStocks)
-  const allJittaStockDetail = await getAllStockDetail(browser, summaryStocks)
-  const allStockDividendDetail = await getStockEvent(browser, summaryStocks)
+  const [
+    allStockProfiles,
+    allJittaStockDetail,
+    allStockDividendDetail,
+    set100TechnicalStocks,
+  ] = await Promise.all([
+    getStockProfile(browser, summaryStocks),
+    getAllStockDetail(browser, summaryStocks),
+    getStockEvent(browser, summaryStocks),
+    getStockTechnical(browser, set100Stocks),
+  ])
+
+  await browser.close()
 
   // Note: Manual resolve advice because tradingview does not have some mai stocks detail.
-  const set100TechnicalStocks = await getStockTechnical(browser, set100Stocks)
   const maiTechnicalStocks = maiStocks.reduce((summary, name) => {
     const manipulatedSummary = summary
     manipulatedSummary[name] = {
@@ -37,8 +48,6 @@ import { getStockEvent } from './settrade'
     return manipulatedSummary
   }, {} as TradingViewStock)
   const allTechnicalStocks: TradingViewStock = { ...set100TechnicalStocks, ...maiTechnicalStocks }
-
-  await browser.close()
 
   const mergedStockDetail: StockDetail[] = allJittaStockDetail.map((jittaDetail) => ({
     ...jittaDetail,
