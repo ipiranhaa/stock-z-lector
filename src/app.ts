@@ -10,6 +10,7 @@ import {
   writingManager,
   parsingSETAndMAIStocks,
 } from './utilities'
+import { getStockEvent } from './settrade'
 ;(async () => {
   const browser: Browser = await puppeteer.launch({
     headless: true,
@@ -24,6 +25,7 @@ import {
 
   const allStockProfiles = await getStockProfile(browser, summaryStocks)
   const allJittaStockDetail = await getAllStockDetail(browser, summaryStocks)
+  const allStockDividendDetail = await getStockEvent(browser, summaryStocks)
 
   // Note: Manual resolve advice because tradingview does not have some mai stocks detail.
   const set100TechnicalStocks = await getStockTechnical(browser, set100Stocks)
@@ -42,6 +44,7 @@ import {
     ...jittaDetail,
     ...allTechnicalStocks[jittaDetail.name],
     ...allStockProfiles[jittaDetail.name],
+    ...allStockDividendDetail[jittaDetail.name],
   }))
 
   const sortedAllResult = prioratiseStock(mergedStockDetail)

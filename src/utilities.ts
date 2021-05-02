@@ -6,8 +6,9 @@ import { ElementHandle } from 'puppeteer'
 import { JittaStockDetail } from './jitta'
 import { SETStockDetail } from './set'
 import { TradingViewDetail } from './tradingView'
+import { dateTimeFormat } from './settings'
+import { SetTradeStockDetail } from './settrade'
 
-const dateTimeFormat = 'dd/MM/yyyy HH:mm:ss'
 const dateFormatOption = { timeZone: 'Asia/Bangkok' }
 const directoryFormat = 'yyyyMMdd'
 
@@ -57,7 +58,11 @@ export const handleGetElements = async (
   return await handleGetElements(promiseFactory, retryCount - 1)
 }
 
-export interface StockDetail extends JittaStockDetail, SETStockDetail, TradingViewDetail {}
+export interface StockDetail
+  extends JittaStockDetail,
+    SETStockDetail,
+    TradingViewDetail,
+    SetTradeStockDetail {}
 
 export const prioratiseStock = (stockDetailList: StockDetail[]) => {
   /* 
