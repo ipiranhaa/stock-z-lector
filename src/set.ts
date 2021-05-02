@@ -41,8 +41,8 @@ const getAllStockByElements = async (elements: ElementHandle[]) => {
 //
 
 export interface SETStockDetail {
-  pe: number
-  pbv: number
+  pe: number | string
+  pbv: number | string
   dvdYield: string
   industry: string
   sector: string
@@ -84,8 +84,8 @@ export const getStockProfile = async (browser: Browser, stocks: string[]) => {
     const sector = await getElementValue(sectorElements[0])
 
     result[stock] = {
-      pe: Number(pe),
-      pbv: Number(pbv),
+      pe: Number(pe) || '',
+      pbv: Number(pbv) || '',
       dvdYield: `${dvdYield.trim()}%`,
       industry: industry.replace('&amp;', '&'),
       sector: sector.replace('&amp;', '&'),

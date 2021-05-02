@@ -41,10 +41,15 @@ export const getStockEvent = async (browser: Browser, stocks: string[]) => {
       `https://www.settrade.com/C04_07_stock_rightsandbenefit_p1.jsp?txtSymbol=${stock}`
     )
 
-    await page.waitForXPath(lastDividendDateXPath)
-
-    const lastDividendDateElements = await handleGetElements(() => page.$x(lastDividendDateXPath))
-    const lastDividendDate = await getElementValue(lastDividendDateElements[0])
+    // Note: Handle disappear row of table
+    let lastDividendDate: string | undefined
+    try {
+      await page.waitForXPath(lastDividendDateXPath, { timeout: 15000 })
+      const lastDividendDateElements = await handleGetElements(() => page.$x(lastDividendDateXPath))
+      lastDividendDate = await getElementValue(lastDividendDateElements[0])
+    } catch {
+      lastDividendDate = undefined
+    }
 
     let predictedDividendDate = '-'
     let formattedLastDividendDate = '-'
@@ -78,7 +83,7 @@ export const getStockEvent = async (browser: Browser, stocks: string[]) => {
         predictedDate: predictedDividendDate,
       },
     }
-    console.info(`Get ${stock}  XD detail... DONE`)
+    console.info(`Get ${stock} XD detail... DONE`)
   }
 
   page.close()
