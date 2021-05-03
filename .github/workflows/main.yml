@@ -26,6 +26,8 @@ jobs:
         run: npm install
       - name: generate indexing files
         run: npm run start
+        env:
+          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
       - name: push new indexing files
         uses: mikeal/publish-to-github-action@master
         env:

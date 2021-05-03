@@ -12,8 +12,11 @@
     "ok": "npx tsc && eslint"
   },
   "dependencies": {
+    "@slack/events-api": "^3.0.0",
+    "@slack/web-api": "^6.1.0",
     "date-fns": "^2.21.1",
     "date-fns-tz": "^1.1.4",
+    "dotenv": "^8.2.0",
     "puppeteer": "^9.0.0"
   },
   "devDependencies": {
