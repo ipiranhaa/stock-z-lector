@@ -11,6 +11,7 @@ import {
   parsingSETAndMAIStocks,
 } from './utilities'
 import { getStockEvent } from './settrade'
+import { sendSlack } from './slack'
 ;(async () => {
   const browser: Browser = await puppeteer.launch({
     headless: true,
@@ -71,4 +72,6 @@ import { getStockEvent } from './settrade'
   const formattedMAIJson = stampDatetime(sortedMAIResult)
 
   writingManager(formattedSET100Json, formattedSET50Json, formattedSETHDJson, formattedMAIJson)
+
+  sendSlack(sortedAllResult)
 })()
