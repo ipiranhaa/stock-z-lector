@@ -37,11 +37,16 @@ const craftMessage = (stocks: StockDetail[]) => {
     },
   }
 
-  const computeStockSection = ({ name, factorPercentage, dvdYield }: StockDetail): Section => ({
+  const computeStockSection = ({
+    name,
+    score,
+    factorPercentage,
+    dvdYield,
+  }: StockDetail): Section => ({
     type: 'section',
     text: {
       type: 'mrkdwn',
-      text: `*${name}* - Score\nFactors rate: ${factorPercentage}, DVD: ${dvdYield}`,
+      text: `*${name}* - ${score.toFixed(2)}\nFactors rate: ${factorPercentage}, DVD: ${dvdYield}`,
     },
     accessory: {
       type: 'button',
