@@ -46,16 +46,9 @@ const craftMessage = (stocks: StockDetail[]) => {
     type: 'section',
     text: {
       type: 'mrkdwn',
-      text: `*${name}* - ${score.toFixed(2)}\nFactors rate: ${factorPercentage}, DVD: ${dvdYield}`,
-    },
-    accessory: {
-      type: 'button',
-      text: {
-        type: 'plain_text',
-        emoji: true,
-        text: 'View',
-      },
-      url: `https://www.tradingview.com/symbols/SET-${name}`,
+      text: `*<https://www.tradingview.com/symbols/SET-${name}|${name}>* - ${score.toFixed(
+        2
+      )}\nFactors rate: ${factorPercentage}, DVD Yield: ${dvdYield}`,
     },
   })
 
@@ -87,10 +80,10 @@ const craftMessage = (stocks: StockDetail[]) => {
 
   return [
     {
-      type: 'section',
+      type: 'header',
       text: {
-        type: 'mrkdwn',
-        text: '*_Strong Buy_*',
+        type: 'plain_text',
+        text: 'Strong Buy',
       },
     },
     ...strongBuySections,
@@ -98,10 +91,10 @@ const craftMessage = (stocks: StockDetail[]) => {
       type: 'divider',
     },
     {
-      type: 'section',
+      type: 'header',
       text: {
-        type: 'mrkdwn',
-        text: '*_Buy_*',
+        type: 'plain_text',
+        text: 'Buy',
       },
     },
     ...buySections,
@@ -109,10 +102,10 @@ const craftMessage = (stocks: StockDetail[]) => {
       type: 'divider',
     },
     {
-      type: 'section',
+      type: 'header',
       text: {
-        type: 'mrkdwn',
-        text: '*_Strong Sell_*',
+        type: 'plain_text',
+        text: 'Strong Sell',
       },
     },
     ...strongSellSections,
@@ -123,7 +116,7 @@ const craftMessage = (stocks: StockDetail[]) => {
       type: 'section',
       text: {
         type: 'mrkdwn',
-        text: '*<https://stock-z-lector.vercel.app/|Show more>*',
+        text: '*<https://stock-z-lector.vercel.app/|Go to app>*',
       },
     },
   ] as Block[]
@@ -131,10 +124,10 @@ const craftMessage = (stocks: StockDetail[]) => {
 
 export const sendSlack = async (stocks: StockDetail[]) => {
   const message = craftMessage(stocks)
-  const res = await web.chat.postMessage({
+  const response = await web.chat.postMessage({
     channel: channelId,
-    text: 'Exceptions',
+    text: 'Daily report',
     blocks: message,
   })
-  console.log('Slack message sent: ', res.ts)
+  console.log('Slack message sent: ', response.ts)
 }
