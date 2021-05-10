@@ -26,7 +26,6 @@ interface Section {
 
 const craftMessage = (stocks: StockDetail[]) => {
   const strongBuy: StockDetail[] = []
-  const buy: StockDetail[] = []
   const strongSell: StockDetail[] = []
 
   const emptySection: Section = {
@@ -55,23 +54,16 @@ const craftMessage = (stocks: StockDetail[]) => {
   stocks.forEach((stock) => {
     if (stock.advice === 'Strong Buy') {
       strongBuy.push(stock)
-    } else if (stock.advice === 'Buy') {
-      buy.push(stock)
     } else if (stock.advice === 'Strong Sell') {
       strongSell.push(stock)
     }
   })
 
   const strongBuySections = strongBuy.map((stock) => computeStockSection(stock))
-  const buySections = buy.map((stock) => computeStockSection(stock))
   const strongSellSections = strongSell.map((stock) => computeStockSection(stock))
 
   if (!strongBuySections.length) {
     strongBuySections.push(emptySection)
-  }
-
-  if (!buySections.length) {
-    buySections.push(emptySection)
   }
 
   if (!strongSellSections.length) {
@@ -87,17 +79,6 @@ const craftMessage = (stocks: StockDetail[]) => {
       },
     },
     ...strongBuySections,
-    {
-      type: 'divider',
-    },
-    {
-      type: 'header',
-      text: {
-        type: 'plain_text',
-        text: 'Buy',
-      },
-    },
-    ...buySections,
     {
       type: 'divider',
     },
