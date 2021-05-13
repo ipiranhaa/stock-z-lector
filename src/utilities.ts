@@ -45,7 +45,7 @@ const createDirectory = (dirPath: string) => {
 
 export const handleGetElements = async (
   promiseFactory: () => Promise<ElementHandle[]>,
-  retryCount = 3
+  retryCount = 2
 ): Promise<ElementHandle[]> => {
   const elements = await promiseFactory()
 

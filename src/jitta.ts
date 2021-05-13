@@ -19,6 +19,8 @@ const scoreXPath =
 
 const factorXPath = '//*[@id="app"]/div/div[3]/div/div/div/div[3]/div[1]/div/div/div[5]/div[1]/div'
 
+const notFoundXPath = '//*[@id="app"]/div/div[3]/div/div/div[1]/div/div/div/h1'
+
 //
 // ─── UTILITIES ──────────────────────────────────────────────────────────────────
 //
@@ -79,40 +81,55 @@ const getStockDetail = async (browser: Browser, stock: string) => {
     await page.setViewport({ width: 1366, height: 768 })
     await page.goto(`https://www.jitta.com/stock/bkk:${stock}`)
 
-    await page.waitForXPath(priceXPath)
-    await page.waitForXPath(lossChanceXPath)
-    await page.waitForXPath(lineXPath)
-    await page.waitForXPath(scoreXPath)
-    await page.waitForXPath(factorXPath)
+    const notFoundTitle = await page.$x(notFoundXPath)
+    if (!notFoundTitle.length) {
+      await page.waitForXPath(priceXPath)
+      await page.waitForXPath(lossChanceXPath)
+      await page.waitForXPath(lineXPath)
+      await page.waitForXPath(scoreXPath)
+      await page.waitForXPath(factorXPath)
 
-    const priceElements = await handleGetElements(() => page.$x(priceXPath))
-    const price = await getElementValue(priceElements[0])
+      const priceElements = await handleGetElements(() => page.$x(priceXPath))
+      const price = await getElementValue(priceElements[0])
 
-    const lossChanceElements = await handleGetElements(() => page.$x(lossChanceXPath))
-    const lossChance = await getElementValue(lossChanceElements[0])
+      const lossChanceElements = await handleGetElements(() => page.$x(lossChanceXPath))
+      const lossChance = await getElementValue(lossChanceElements[0])
 
-    const lineElements = await handleGetElements(() => page.$x(lineXPath))
-    const linePercentage = await getLine(lineElements)
+      const lineElements = await handleGetElements(() => page.$x(lineXPath))
+      const linePercentage = await getLine(lineElements)
 
-    const scoreElements = await handleGetElements(() => page.$x(scoreXPath))
-    const score = await getScore(scoreElements)
+      const scoreElements = await handleGetElements(() => page.$x(scoreXPath))
+      const score = await getScore(scoreElements)
 
-    // Factors
-    const factorElements = await page.$x(factorXPath)
-    const { totalFactorScore, factorCount } = await getFactorScore(factorElements)
-    const totalFactorPercentage = `${((totalFactorScore / (100 * factorCount)) * 100).toFixed(2)}%`
-    page.close()
+      // Factors
+      const factorElements = await page.$x(factorXPath)
+      const { totalFactorScore, factorCount } = await getFactorScore(factorElements)
+      const totalFactorPercentage = `${((totalFactorScore / (100 * factorCount)) * 100).toFixed(
+        2
+      )}%`
+      page.close()
 
-    console.info(`Get ${stockName} detail... DONE`)
+      console.info(`Get ${stockName} detail... DONE`)
 
-    return {
-      name: stockName,
-      price,
-      lossChance,
-      linePercentage,
-      score: Number(score),
-      factorPercentage: totalFactorPercentage,
-    } as JittaStockDetail
+      return {
+        name: stockName,
+        price,
+        lossChance,
+        linePercentage,
+        score: Number(score),
+        factorPercentage: totalFactorPercentage,
+      } as JittaStockDetail
+    } else {
+      // Stock detail page not available
+      return {
+        name: stockName,
+        price: '-',
+        lossChance: '-',
+        linePercentage: '-',
+        score: NaN,
+        factorPercentage: '-',
+      } as JittaStockDetail
+    }
   } catch (error) {
     console.error(error)
     throw error
