@@ -26,6 +26,7 @@ export interface TradingViewStock {
 export const getStockTechnical = async (browser: Browser, stocks: string[]) => {
   const page: Page = await browser.newPage()
   await page.setUserAgent(userAgent)
+  await page.setDefaultNavigationTimeout(0)
   const result: TradingViewStock = {}
 
   for (let index = 0; index < stocks.length; index++) {

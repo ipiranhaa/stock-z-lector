@@ -79,6 +79,7 @@ const getStockDetail = async (browser: Browser, stock: string) => {
     const page: Page = await browser.newPage()
     await page.setUserAgent(userAgent)
     await page.setViewport({ width: 1366, height: 768 })
+    await page.setDefaultNavigationTimeout(0)
     await page.goto(`https://www.jitta.com/stock/bkk:${stock}`)
 
     const notFoundTitle = await page.$x(notFoundXPath)

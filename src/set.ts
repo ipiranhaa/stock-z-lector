@@ -55,6 +55,7 @@ export interface SETStockDetailIndex {
 export const getStockProfile = async (browser: Browser, stocks: string[]) => {
   const page: Page = await browser.newPage()
   await page.setUserAgent(userAgent)
+  await page.setDefaultNavigationTimeout(0)
   const result: SETStockDetailIndex = {}
 
   for (let index = 0; index < stocks.length; index++) {
@@ -113,6 +114,7 @@ export const getStockByIndex = async (
 
   const page: Page = await browser.newPage()
   await page.setUserAgent(userAgent)
+  await page.setDefaultNavigationTimeout(0)
   await page.goto(url)
 
   await page.waitForXPath(tableBodyXPath)

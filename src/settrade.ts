@@ -31,6 +31,7 @@ interface SetTradeStockIndex {
 export const getStockEvent = async (browser: Browser, stocks: string[]) => {
   const page: Page = await browser.newPage()
   await page.setUserAgent(userAgent)
+  await page.setDefaultNavigationTimeout(0)
   const result: SetTradeStockIndex = {}
 
   for (let index = 0; index < stocks.length; index++) {
@@ -59,11 +60,8 @@ export const getStockEvent = async (browser: Browser, stocks: string[]) => {
       const lastDividendFullYear = `${century}${lastDividendYear}`
       formattedLastDividendDate = `${lastDividendDay}/${lastDividendMonth}/${lastDividendFullYear}`
 
-      const [
-        predictedDividendDay,
-        predictedDividendMonth,
-        predictedDividendYear,
-      ] = lastDividendDate.split('/')
+      const [predictedDividendDay, predictedDividendMonth, predictedDividendYear] =
+        lastDividendDate.split('/')
       predictedDividendDate = format(
         addYears(
           new Date(
