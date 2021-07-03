@@ -72,6 +72,7 @@ import { sendSlack } from './slack'
 
     sendSlack(sortedAllResult)
   } catch (error) {
+    console.log(error)
     process.exit(1)
   }
 })()
