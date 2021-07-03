@@ -1,5 +1,6 @@
 import { Browser, ElementHandle, Page } from 'puppeteer'
 import { industries, Industry } from './configuration/industries'
+import { defaultOptions } from './puppeteer-config'
 import { getElementValue, handleGetElements } from './utilities'
 
 type StockIndexing = 'SET50' | 'SET100' | 'SETHD' | 'MAI'
@@ -66,11 +67,11 @@ export const getStockProfile = async (browser: Browser, stocks: string[]) => {
       `https://www.set.or.th/set/companyprofile.do?symbol=${stock}&language=en&country=US`
     )
 
-    await page.waitForXPath(peXPath)
-    await page.waitForXPath(pbvXPath)
-    await page.waitForXPath(dvdYieldXPath)
-    await page.waitForXPath(industryXPath)
-    await page.waitForXPath(sectorXPath)
+    await page.waitForXPath(peXPath, defaultOptions)
+    await page.waitForXPath(pbvXPath, defaultOptions)
+    await page.waitForXPath(dvdYieldXPath, defaultOptions)
+    await page.waitForXPath(industryXPath, defaultOptions)
+    await page.waitForXPath(sectorXPath, defaultOptions)
 
     const peElements = await handleGetElements(() => page.$x(peXPath))
     const pbvElements = await handleGetElements(() => page.$x(pbvXPath))
@@ -117,7 +118,7 @@ export const getStockByIndex = async (
   await page.setDefaultNavigationTimeout(0)
   await page.goto(url)
 
-  await page.waitForXPath(tableBodyXPath)
+  await page.waitForXPath(tableBodyXPath, defaultOptions)
 
   const elements = await handleGetElements(() => page.$x(tableBodyXPath))
   const stocks = await getAllStockByElements(elements)

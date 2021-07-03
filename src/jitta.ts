@@ -1,4 +1,5 @@
 import { Browser, ElementHandle, Page } from 'puppeteer'
+import { defaultOptions } from './puppeteer-config'
 import { getElementValue, handleGetElements } from './utilities'
 
 //
@@ -84,11 +85,11 @@ const getStockDetail = async (browser: Browser, stock: string) => {
 
     const notFoundTitle = await page.$x(notFoundXPath)
     if (!notFoundTitle.length) {
-      await page.waitForXPath(priceXPath)
-      await page.waitForXPath(lossChanceXPath)
-      await page.waitForXPath(lineXPath)
-      await page.waitForXPath(scoreXPath)
-      await page.waitForXPath(factorXPath)
+      await page.waitForXPath(priceXPath, defaultOptions)
+      await page.waitForXPath(lossChanceXPath, defaultOptions)
+      await page.waitForXPath(lineXPath, defaultOptions)
+      await page.waitForXPath(scoreXPath, defaultOptions)
+      await page.waitForXPath(factorXPath, defaultOptions)
 
       const priceElements = await handleGetElements(() => page.$x(priceXPath))
       const price = await getElementValue(priceElements[0])

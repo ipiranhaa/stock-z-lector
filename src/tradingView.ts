@@ -1,4 +1,5 @@
 import { Browser, Page } from 'puppeteer'
+import { defaultOptions } from './puppeteer-config'
 import { getElementValue, handleGetElements } from './utilities'
 
 //
@@ -37,8 +38,8 @@ export const getStockTechnical = async (browser: Browser, stocks: string[]) => {
 
     // Wait for 1 second to wait data display
     await new Promise((resolve) => setTimeout(resolve, 1000))
-    await page.waitForXPath(topDetailXPath)
-    await page.waitForXPath(summaryXPath)
+    await page.waitForXPath(topDetailXPath, defaultOptions)
+    await page.waitForXPath(summaryXPath, defaultOptions)
 
     const adviceElements = await handleGetElements(() => page.$x(summaryXPath))
     const advice = await getElementValue(adviceElements[0])
