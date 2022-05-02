@@ -108,9 +108,9 @@ export const getStockByIndex = async (
   const industryLogPrefix = industry ? ` - ${industry}` : ''
   console.info(`Getting ${indexing}${industryLogPrefix} stock list...`)
 
-  let url = `https://marketdata.set.or.th/mkt/sectorquotation.do?sector=${indexing}&language=en&country=US`
+  let url = `https://classic.set.or.th/mkt/sectorquotation.do?sector=${indexing}&language=en&country=US`
   if (industry) {
-    url = `https://marketdata.set.or.th/mkt/sectorquotation.do?market=${indexing}&sector=${industry}&language=en&country=US`
+    url = `https://classic.set.or.th/mkt/sectorquotation.do?market=${indexing}&sector=${industry}&language=en&country=US`
   }
 
   const page: Page = await browser.newPage()
