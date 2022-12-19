@@ -1,4 +1,4 @@
-import { Browser, Page } from 'puppeteer'
+import { Browser, ElementHandle, Page } from 'puppeteer'
 import { defaultOptions } from './puppeteer-config'
 import { getElementValue, handleGetElements } from './utilities'
 
@@ -41,7 +41,9 @@ export const getStockTechnical = async (browser: Browser, stocks: string[]) => {
     await page.waitForXPath(topDetailXPath, defaultOptions)
     await page.waitForXPath(summaryXPath, defaultOptions)
 
-    const adviceElements = await handleGetElements(() => page.$x(summaryXPath))
+    const adviceElements = (await handleGetElements(() =>
+      page.$x(summaryXPath)
+    )) as ElementHandle<Element>[]
     const advice = await getElementValue(adviceElements[0])
     result[stock] = {
       advice,

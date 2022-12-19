@@ -44,9 +44,9 @@ const createDirectory = (dirPath: string) => {
 //
 
 export const handleGetElements = async (
-  promiseFactory: () => Promise<ElementHandle[]>,
+  promiseFactory: () => Promise<ElementHandle<Node>[]>,
   retryCount = 2
-): Promise<ElementHandle[]> => {
+): Promise<ElementHandle<Node>[]> => {
   const elements = await promiseFactory()
 
   if (elements.length !== 0) return elements
@@ -75,8 +75,8 @@ export const prioratiseStock = (stockDetailList: StockDetail[]) => {
   return stockDetailList.sort(byScore)
 }
 
-export const getElementValue = async (element: ElementHandle) =>
-  element.evaluate((element: Element) => element.innerHTML)
+export const getElementValue = async (element: ElementHandle<Element>): Promise<string> =>
+  element.evaluate((element) => element.innerHTML)
 
 export const parsingSETAndMAIStocks = (
   stocks: StockDetail[],

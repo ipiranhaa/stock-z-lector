@@ -1,5 +1,5 @@
 import { format, addYears } from 'date-fns'
-import { Browser, Page } from 'puppeteer'
+import { Browser, ElementHandle, Page } from 'puppeteer'
 import { century, dateFormat } from './settings'
 import { getElementValue, handleGetElements } from './utilities'
 
@@ -46,7 +46,9 @@ export const getStockEvent = async (browser: Browser, stocks: string[]) => {
     let lastDividendDate: string | undefined
     try {
       await page.waitForXPath(lastDividendDateXPath, { timeout: 15000 })
-      const lastDividendDateElements = await handleGetElements(() => page.$x(lastDividendDateXPath))
+      const lastDividendDateElements = (await handleGetElements(() =>
+        page.$x(lastDividendDateXPath)
+      )) as ElementHandle<Element>[]
       lastDividendDate = await getElementValue(lastDividendDateElements[0])
     } catch {
       lastDividendDate = undefined

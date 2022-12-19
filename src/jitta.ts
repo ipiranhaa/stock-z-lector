@@ -91,20 +91,28 @@ const getStockDetail = async (browser: Browser, stock: string) => {
       await page.waitForXPath(scoreXPath, defaultOptions)
       await page.waitForXPath(factorXPath, defaultOptions)
 
-      const priceElements = await handleGetElements(() => page.$x(priceXPath))
+      const priceElements = (await handleGetElements(() =>
+        page.$x(priceXPath)
+      )) as ElementHandle<Element>[]
       const price = await getElementValue(priceElements[0])
 
-      const lossChanceElements = await handleGetElements(() => page.$x(lossChanceXPath))
+      const lossChanceElements = (await handleGetElements(() =>
+        page.$x(lossChanceXPath)
+      )) as ElementHandle<Element>[]
       const lossChance = await getElementValue(lossChanceElements[0])
 
-      const lineElements = await handleGetElements(() => page.$x(lineXPath))
+      const lineElements = (await handleGetElements(() =>
+        page.$x(lineXPath)
+      )) as ElementHandle<Element>[]
       const linePercentage = await getLine(lineElements)
 
-      const scoreElements = await handleGetElements(() => page.$x(scoreXPath))
+      const scoreElements = (await handleGetElements(() =>
+        page.$x(scoreXPath)
+      )) as ElementHandle<Element>[]
       const score = await getScore(scoreElements)
 
       // Factors
-      const factorElements = await page.$x(factorXPath)
+      const factorElements = (await page.$x(factorXPath)) as ElementHandle<Element>[]
       const { totalFactorScore, factorCount } = await getFactorScore(factorElements)
       const totalFactorPercentage = `${((totalFactorScore / (100 * factorCount)) * 100).toFixed(
         2

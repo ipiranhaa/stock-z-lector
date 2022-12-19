@@ -27,7 +27,7 @@ const sectorXPath =
 // ─── UTILITIES ──────────────────────────────────────────────────────────────────
 //
 
-const getAllStockByElements = async (elements: ElementHandle[]) => {
+const getAllStockByElements = async (elements: ElementHandle<Node>[]) => {
   const stocks = []
   for (let index = 0; index < elements.length; index++) {
     const name = await elements[index].$eval('td > a', (a: Element) => a.innerHTML)
@@ -73,11 +73,19 @@ export const getStockProfile = async (browser: Browser, stocks: string[]) => {
     await page.waitForXPath(industryXPath, defaultOptions)
     await page.waitForXPath(sectorXPath, defaultOptions)
 
-    const peElements = await handleGetElements(() => page.$x(peXPath))
-    const pbvElements = await handleGetElements(() => page.$x(pbvXPath))
-    const dvdYieldElements = await handleGetElements(() => page.$x(dvdYieldXPath))
-    const industryElements = await handleGetElements(() => page.$x(industryXPath))
-    const sectorElements = await handleGetElements(() => page.$x(sectorXPath))
+    const peElements = (await handleGetElements(() => page.$x(peXPath))) as ElementHandle<Element>[]
+    const pbvElements = (await handleGetElements(() =>
+      page.$x(pbvXPath)
+    )) as ElementHandle<Element>[]
+    const dvdYieldElements = (await handleGetElements(() =>
+      page.$x(dvdYieldXPath)
+    )) as ElementHandle<Element>[]
+    const industryElements = (await handleGetElements(() =>
+      page.$x(industryXPath)
+    )) as ElementHandle<Element>[]
+    const sectorElements = (await handleGetElements(() =>
+      page.$x(sectorXPath)
+    )) as ElementHandle<Element>[]
 
     const pe = await getElementValue(peElements[0])
     const pbv = await getElementValue(pbvElements[0])
