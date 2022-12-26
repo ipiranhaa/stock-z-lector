@@ -20,7 +20,5 @@ Thai stock selector automation which is generating the index every weekday.
 - [x] Factors rate
 - [x] Dividend yield
 - [x] Loss change
-- [x] Community suggestion
 - [x] Investor and sector
-- [ ] Last XD date
-- [ ] Free float rate
+- [x] Last XD date
