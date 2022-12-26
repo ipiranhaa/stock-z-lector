@@ -1,17 +1,17 @@
 import { format, addYears } from 'date-fns'
 import { Browser, ElementHandle, Page } from 'puppeteer'
-import { century, dateFormat } from './settings'
+import { userAgent } from './puppeteer-config'
+import { dateFormat } from './settings'
 import { getElementValue, handleGetElements } from './utilities'
+import mapThMonthToNumber from './utils/mapThMonthToNumber'
 
 //
 // ─── SETTINGS ───────────────────────────────────────────────────────────────────
 //
 
-const userAgent =
-  'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150  Safari/537.36'
-
-const lastDividendDateXPath =
-  '//*[@id="maincontent"]/div/div[1]/div[1]/div/div[2]/div[5]/div/div/table/tbody/tr[1]/td[1]'
+const XdTabButtonXPath =
+  '//*[@id="__layout"]/div/div[2]/div[3]/div/div/div/div/div[1]/div[2]/div[1]/button[2]'
+const lastDividendDateXPath = '//*[contains(@class, "table-hover-underline")]/tbody/tr[1]/td[1]'
 
 //
 // ─── MAIN ───────────────────────────────────────────────────────────────────────
@@ -38,36 +38,34 @@ export const getStockEvent = async (browser: Browser, stocks: string[]) => {
     const stock = stocks[index]
     console.info(`Getting ${stock} XD detail...`)
 
-    await page.goto(
-      `https://www.settrade.com/C04_07_stock_rightsandbenefit_p1.jsp?txtSymbol=${stock}`
-    )
+    await page.goto(`https://www.settrade.com/th/equities/quote/${stock}/rights-benefits`)
 
     // Note: Handle disappear row of table
     let lastDividendDate: string | undefined
     try {
+      const [xdButtonElement] = (await page.$x(XdTabButtonXPath)) as ElementHandle<Element>[]
+      await xdButtonElement.click()
       await page.waitForXPath(lastDividendDateXPath, { timeout: 15000 })
       const lastDividendDateElements = (await handleGetElements(() =>
         page.$x(lastDividendDateXPath)
       )) as ElementHandle<Element>[]
-      lastDividendDate = await getElementValue(lastDividendDateElements[0])
+      const thDate = await getElementValue(lastDividendDateElements[0])
+      const [date, thMonth, thYear] = thDate.trim().split(' ')
+      const dateNo = Number(date) >= 10 ? date : `0${date}`
+      lastDividendDate = `${dateNo}/${mapThMonthToNumber(thMonth)}/${Number(thYear) - 543}` // 29/04/2022
     } catch {
-      lastDividendDate = undefined
+      lastDividendDate = '-'
     }
 
     let predictedDividendDate = '-'
-    let formattedLastDividendDate = '-'
 
     if (lastDividendDate && lastDividendDate !== '-') {
-      const [lastDividendDay, lastDividendMonth, lastDividendYear] = lastDividendDate.split('/')
-      const lastDividendFullYear = `${century}${lastDividendYear}`
-      formattedLastDividendDate = `${lastDividendDay}/${lastDividendMonth}/${lastDividendFullYear}`
-
       const [predictedDividendDay, predictedDividendMonth, predictedDividendYear] =
         lastDividendDate.split('/')
       predictedDividendDate = format(
         addYears(
           new Date(
-            Number(`${century}${predictedDividendYear}`),
+            Number(predictedDividendYear),
             Number(predictedDividendMonth) - 1,
             Number(predictedDividendDay)
           ),
@@ -79,14 +77,14 @@ export const getStockEvent = async (browser: Browser, stocks: string[]) => {
 
     result[stock] = {
       dividend: {
-        lastDate: formattedLastDividendDate,
+        lastDate: lastDividendDate,
         predictedDate: predictedDividendDate,
       },
     }
     console.info(`Get ${stock} XD detail... DONE`)
   }
 
-  page.close()
+  await page.close()
 
   return result
 }

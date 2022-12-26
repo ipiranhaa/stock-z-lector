@@ -1,6 +1,6 @@
 import { Browser, ElementHandle, Page } from 'puppeteer'
 import { industries, Industry } from './configuration/industries'
-import { defaultOptions } from './puppeteer-config'
+import { defaultOptions, userAgent } from './puppeteer-config'
 import { getElementValue, handleGetElements } from './utilities'
 
 type StockIndexing = 'SET50' | 'SET100' | 'SETHD' | 'MAI'
@@ -8,9 +8,6 @@ type StockIndexing = 'SET50' | 'SET100' | 'SETHD' | 'MAI'
 //
 // ─── SETTINGS ───────────────────────────────────────────────────────────────────
 //
-
-const userAgent =
-  'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150  Safari/537.36'
 
 const tableBodyXPath = '//*[@id="maincontent"]/div/div[2]/div/div/div/div[3]/table/tbody/tr'
 
@@ -64,34 +61,64 @@ export const getStockProfile = async (browser: Browser, stocks: string[]) => {
     console.info(`Getting SET ${stock} profile...`)
 
     await page.goto(
-      `https://www.set.or.th/set/companyprofile.do?symbol=${stock}&language=en&country=US`
+      `https://classic.set.or.th/set/companyprofile.do?symbol=${stock}&language=en&country=US`
     )
 
-    await page.waitForXPath(peXPath, defaultOptions)
-    await page.waitForXPath(pbvXPath, defaultOptions)
-    await page.waitForXPath(dvdYieldXPath, defaultOptions)
-    await page.waitForXPath(industryXPath, defaultOptions)
-    await page.waitForXPath(sectorXPath, defaultOptions)
+    let pe = ''
+    let pbv = ''
+    let dvdYield = ''
+    let industry = ''
+    let sector = ''
 
-    const peElements = (await handleGetElements(() => page.$x(peXPath))) as ElementHandle<Element>[]
-    const pbvElements = (await handleGetElements(() =>
-      page.$x(pbvXPath)
-    )) as ElementHandle<Element>[]
-    const dvdYieldElements = (await handleGetElements(() =>
-      page.$x(dvdYieldXPath)
-    )) as ElementHandle<Element>[]
-    const industryElements = (await handleGetElements(() =>
-      page.$x(industryXPath)
-    )) as ElementHandle<Element>[]
-    const sectorElements = (await handleGetElements(() =>
-      page.$x(sectorXPath)
-    )) as ElementHandle<Element>[]
+    try {
+      await page.waitForXPath(peXPath, defaultOptions)
+      const peElements = (await handleGetElements(() =>
+        page.$x(peXPath)
+      )) as ElementHandle<Element>[]
+      pe = await getElementValue(peElements[0])
+    } catch {
+      pe = 'N/A'
+    }
 
-    const pe = await getElementValue(peElements[0])
-    const pbv = await getElementValue(pbvElements[0])
-    const dvdYield = await getElementValue(dvdYieldElements[0])
-    const industry = await getElementValue(industryElements[0])
-    const sector = await getElementValue(sectorElements[0])
+    try {
+      await page.waitForXPath(pbvXPath, defaultOptions)
+      const pbvElements = (await handleGetElements(() =>
+        page.$x(pbvXPath)
+      )) as ElementHandle<Element>[]
+      pbv = await getElementValue(pbvElements[0])
+    } catch {
+      pbv = 'N/A'
+    }
+
+    try {
+      await page.waitForXPath(dvdYieldXPath, defaultOptions)
+      const dvdYieldElements = (await handleGetElements(() =>
+        page.$x(dvdYieldXPath)
+      )) as ElementHandle<Element>[]
+      dvdYield = await getElementValue(dvdYieldElements[0])
+    } catch {
+      dvdYield = 'N/A'
+    }
+
+    try {
+      await page.waitForXPath(industryXPath, defaultOptions)
+      const industryElements = (await handleGetElements(() =>
+        page.$x(industryXPath)
+      )) as ElementHandle<Element>[]
+      industry = await getElementValue(industryElements[0])
+    } catch {
+      industry = 'N/A'
+    }
+
+    try {
+      await page.waitForXPath(sectorXPath, defaultOptions)
+      const sectorElements = (await handleGetElements(() =>
+        page.$x(sectorXPath)
+      )) as ElementHandle<Element>[]
+      sector = await getElementValue(sectorElements[0])
+    } catch {
+      sector = 'N/A'
+    }
 
     result[stock] = {
       pe: Number(pe) || '',
@@ -103,7 +130,7 @@ export const getStockProfile = async (browser: Browser, stocks: string[]) => {
     console.info(`Get SET ${stock} profile... DONE`)
   }
 
-  page.close()
+  await page.close()
 
   return result
 }
@@ -130,7 +157,7 @@ export const getStockByIndex = async (
 
   const elements = await handleGetElements(() => page.$x(tableBodyXPath))
   const stocks = await getAllStockByElements(elements)
-  page.close()
+  await page.close()
 
   console.info(`Get ${indexing}${industryLogPrefix} stock list... DONE`)
 

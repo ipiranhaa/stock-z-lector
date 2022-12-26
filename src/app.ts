@@ -2,7 +2,6 @@ import puppeteer, { Browser } from 'puppeteer'
 
 import { getStockByIndex, getMAIStock, getStockProfile } from './set'
 import { getAllStockDetail, JittaStockDetail } from './jitta'
-import { getStockTechnical, TradingViewStock } from './tradingView'
 import {
   prioratiseStock,
   StockDetail,
@@ -16,6 +15,10 @@ import { sendSlack } from './slack'
   try {
     const browser: Browser = await puppeteer.launch({
       headless: true,
+      defaultViewport: {
+        width: 1980,
+        height: 1080,
+      },
       args: ['--no-sandbox', '--disable-setuid-sandbox', '--start-maximized'],
     })
 
@@ -25,31 +28,28 @@ import { sendSlack } from './slack'
       getStockByIndex(browser, 'SETHD'),
       getMAIStock(browser),
     ])
+
+    // ─── For Manual Testing ──────────────────────────────────────
+
+    // const [set50Stocks, set100Stocks, setHDStocks, maiStocks] = [
+    //   ['BANPU'],
+    //   ['ACE', 'BANPU', 'BCH'],
+    //   ['BCH'],
+    //   ['AU'],
+    // ]
+
     const summaryStocks = [...set100Stocks, ...maiStocks]
 
-    const [allStockProfiles, allJittaStockDetail, allStockDividendDetail, set100TechnicalStocks] =
-      await Promise.all([
-        getStockProfile(browser, summaryStocks),
-        getAllStockDetail(browser, summaryStocks),
-        getStockEvent(browser, summaryStocks),
-        getStockTechnical(browser, set100Stocks),
-      ])
+    const [allStockProfiles, allJittaStockDetail, allStockDividendDetail] = await Promise.all([
+      getStockProfile(browser, summaryStocks),
+      getAllStockDetail(browser, summaryStocks),
+      getStockEvent(browser, summaryStocks),
+    ])
 
     await browser.close()
 
-    // Note: Manual resolve advice because tradingview does not have some mai stocks detail.
-    const maiTechnicalStocks = maiStocks.reduce((summary, name) => {
-      const manipulatedSummary = summary
-      manipulatedSummary[name] = {
-        advice: '',
-      }
-      return manipulatedSummary
-    }, {} as TradingViewStock)
-    const allTechnicalStocks: TradingViewStock = { ...set100TechnicalStocks, ...maiTechnicalStocks }
-
     const mergedStockDetail: StockDetail[] = allJittaStockDetail.map((jittaDetail) => ({
       ...jittaDetail,
-      ...allTechnicalStocks[jittaDetail.name],
       ...allStockProfiles[jittaDetail.name],
       ...allStockDividendDetail[jittaDetail.name],
     }))
@@ -70,7 +70,7 @@ import { sendSlack } from './slack'
 
     writingManager(formattedSET100Json, formattedSET50Json, formattedSETHDJson, formattedMAIJson)
 
-    sendSlack(sortedAllResult)
+    sendSlack()
   } catch (error) {
     console.log(error)
     process.exit(1)
